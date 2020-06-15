@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Main = (props) => {
   const {offersCount, captions, handleClick} = props;
-  return <React.Fragment>
+  return (
     <div className="page page--gray page--main">
       <header className="header">
         <div className="container">
@@ -132,7 +132,7 @@ const Main = (props) => {
         </div>
       </main>
     </div>
-  </React.Fragment>;
+  );
 };
 
 Main.propTypes = {
