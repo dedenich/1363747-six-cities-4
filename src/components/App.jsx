@@ -3,6 +3,7 @@ import Main from "./Main.jsx";
 import PropTypes from 'prop-types';
 
 const App = (props) => {
+
   const {offersCount, captions} = props;
   return <React.Fragment>
     <Main
