@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from 'prop-types';
 
 const Main = (props) => {
-  const {offersCount, captions} = props;
-  return <React.Fragment>
+  const {offersCount, captions, handleClick} = props;
+  return (
     <div className="page page--gray page--main">
       <header className="header">
         <div className="container">
@@ -70,7 +70,7 @@ const Main = (props) => {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offersCount} places to stay in Amsterdam</b>
+              <b className="places__found" onClick={handleClick}>{offersCount} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex="0">
@@ -132,12 +132,13 @@ const Main = (props) => {
         </div>
       </main>
     </div>
-  </React.Fragment>;
+  );
 };
 
 Main.propTypes = {
   offersCount: PropTypes.number.isRequired,
   captions: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  handleClick: PropTypes.func
 };
 
 export default Main;
