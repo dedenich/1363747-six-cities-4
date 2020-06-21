@@ -1,6 +1,5 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
-// import Offers from "../../mocks/offers.js"
 
 export default class OfferCard extends PureComponent {
   constructor(props) {
