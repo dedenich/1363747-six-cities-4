@@ -15,7 +15,7 @@ const mockOffer = {
 
 it(`should pass correct information to callback`, () => {
   const handleCardHover = jest.fn();
-  const mockedEvent = { target: {} }
+  const mockedEvent = {target: {}};
   const card = shallow(
       <OfferCard
         offer={mockOffer}
