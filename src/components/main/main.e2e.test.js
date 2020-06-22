@@ -7,16 +7,30 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
+const mockOffersList = [
+  {
+    caption: `Capion 1`,
+    src: `https://path`,
+    price: 100
+  },
+  {
+    caption: `Capion 2`,
+    src: `https://path`,
+    price: 160
+  },
+  {
+    caption: `Capion 3`,
+    src: `https://path`,
+    price: 90
+  },
+];
+
 it(`should detect when header is pressed`, () => {
   const onHeaderClick = jest.fn();
   const main = shallow(
       <Main
         offersCount={123}
-        captions={[
-          `Description 1`,
-          `Description 2`,
-          `Description 3`,
-          `Description 4`]}
+        offers={mockOffersList}
         handleClick={onHeaderClick}
       />
   );
