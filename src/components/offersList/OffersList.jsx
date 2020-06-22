@@ -8,6 +8,7 @@ export default class OffersList extends PureComponent {
     this.state = {
       activeCard: null,
     };
+    this.handleCardHover = this.handleCardHover.bind(this);
   }
 
   handleCardHover(evt) {
