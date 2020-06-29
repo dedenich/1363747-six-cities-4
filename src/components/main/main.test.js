@@ -1,5 +1,5 @@
 import React from 'react';
-import Main from './main.jsx';
+import Main from './Main.jsx';
 import renderer from 'react-test-renderer';
 
 const mockOffersList = [
