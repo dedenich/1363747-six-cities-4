@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import OffersList from "../offersList/OffersList.jsx";
+import OffersList from "../offers-list/offers-list.jsx";
 
 const Main = (props) => {
-  const {offersCount, offers, handleClick} = props;
+  const {offersCount, offers, handleClick, onHeadingClick} = props;
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -89,6 +89,7 @@ const Main = (props) => {
               </form>
               <OffersList
                 offers={offers}
+                onHeadingClick={onHeadingClick}
               />
             </section>
             <div className="cities__right-section">
@@ -110,7 +111,8 @@ Main.propTypes = {
         price: PropTypes.number.isRequired,
       }).isRequired
   ).isRequired,
-  handleClick: PropTypes.func
+  handleClick: PropTypes.func,
+  onHeadingClick: PropTypes.func
 };
 
 export default Main;

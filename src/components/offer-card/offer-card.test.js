@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import OfferCard from './OfferCard.jsx';
+import OfferCard from './offer-card.jsx';
 
 const mockOffer = {
   caption: `Down by the Way, in Minsk`,
