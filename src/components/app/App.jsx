@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import PropertyScreen from "../property-screen/property-screen.jsx";
-import Main from "../main/main.jsx";
+import Main from "../main/Main.jsx";
 import MockProperties from "../../mocks/properties.js";
 
 export default class App extends PureComponent {
