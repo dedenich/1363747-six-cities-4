@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import PropertyScreen from "../property-screen/property-screen.jsx";
 import Main from "../main/Main.jsx";
-import MockProperties from "../../mocks/properties.js";
+import mockProperties from "../../mocks/properties.js";
 
 export default class App extends PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
-      currentOffer: -1,
+      currentOffer: null,
     };
 
     this.handleHeadingClick = this.handleHeadingClick.bind(this);
@@ -23,21 +23,21 @@ export default class App extends PureComponent {
   _renderApp() {
     const {currentOffer} = this.state;
     const {offersCount, offers} = this.props;
-    const {photos, heading, describtion, premium, type, rating, bedroomsNumber, maxGuests, price, list, host} = MockProperties;
-    if (currentOffer !== -1) {
+    const properties = mockProperties;
+    if (currentOffer !== null) {
       return (
         <PropertyScreen
-          photos={photos}
-          heading={heading}
-          describtion={describtion}
-          premium={premium}
-          type={type}
-          rating={rating}
-          bedroomsNumber={bedroomsNumber}
-          maxGuests={maxGuests}
-          price={price}
-          list={list}
-          host={host}
+          photos={properties.photos}
+          heading={properties.heading}
+          describtion={properties.describtion}
+          premium={properties.premium}
+          type={properties.type}
+          rating={properties.rating}
+          bedroomsNumber={properties.bedroomsNumber}
+          maxGuests={properties.maxGuests}
+          price={properties.price}
+          list={properties.list}
+          host={properties.host}
         />
       );
     } else {
@@ -52,8 +52,7 @@ export default class App extends PureComponent {
   }
 
   render() {
-    const {photos, heading, describtion, premium, type, rating, bedroomsNumber, maxGuests, price, list, host} = MockProperties;
-    // const {offersCount, offers} = this.props;
+    const properties = mockProperties;
     return (
       <BrowserRouter>
         <Switch>
@@ -62,17 +61,17 @@ export default class App extends PureComponent {
           </Route>
           <Route exact path="/offer">
             <PropertyScreen
-              photos={photos}
-              heading={heading}
-              describtion={describtion}
-              premium={premium}
-              type={type}
-              rating={rating}
-              bedroomsNumber={bedroomsNumber}
-              maxGuests={maxGuests}
-              price={price}
-              list={list}
-              host={host}
+              photos={properties.photos}
+              heading={properties.heading}
+              describtion={properties.describtion}
+              premium={properties.premium}
+              type={properties.type}
+              rating={properties.rating}
+              bedroomsNumber={properties.bedroomsNumber}
+              maxGuests={properties.maxGuests}
+              price={properties.price}
+              list={properties.list}
+              host={properties.host}
             />
           </Route>
         </Switch>
