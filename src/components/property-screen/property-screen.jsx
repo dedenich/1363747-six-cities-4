@@ -7,7 +7,7 @@ export default class PropretyScreen extends PureComponent {
   }
 
   render() {
-    const {photos, heading, describtion, premium, type, rating, bedroomsNumber, maxGuests, price, list, host} = this.props;
+    const {photos, heading, describtion, premium, type, rating, bedroomsNumber, maxGuests, price, list, host} = this.props.offer;
     return (
       <div className="page">
         <header className="header">

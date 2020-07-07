@@ -32,21 +32,10 @@ const mockProperties = {
 };
 
 it(`renders correctly`, () => {
-  const {photos, heading, describtion, premium, type, rating, bedroomsNumber, maxGuests, price, list, host} = mockProperties;
   const tree = renderer
   .create(
       <PropertyScreen
-        photos={photos}
-        heading={heading}
-        describtion={describtion}
-        premium={premium}
-        type={type}
-        rating={rating}
-        bedroomsNumber={bedroomsNumber}
-        maxGuests={maxGuests}
-        price={price}
-        list={list}
-        host={host}
+        offer={mockProperties}
       />
   )
   .toJSON();

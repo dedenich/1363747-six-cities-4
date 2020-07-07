@@ -27,17 +27,7 @@ export default class App extends PureComponent {
     if (currentOffer !== null) {
       return (
         <PropertyScreen
-          photos={properties.photos}
-          heading={properties.heading}
-          describtion={properties.describtion}
-          premium={properties.premium}
-          type={properties.type}
-          rating={properties.rating}
-          bedroomsNumber={properties.bedroomsNumber}
-          maxGuests={properties.maxGuests}
-          price={properties.price}
-          list={properties.list}
-          host={properties.host}
+          offer={properties}
         />
       );
     } else {
@@ -61,17 +51,7 @@ export default class App extends PureComponent {
           </Route>
           <Route exact path="/offer">
             <PropertyScreen
-              photos={properties.photos}
-              heading={properties.heading}
-              describtion={properties.describtion}
-              premium={properties.premium}
-              type={properties.type}
-              rating={properties.rating}
-              bedroomsNumber={properties.bedroomsNumber}
-              maxGuests={properties.maxGuests}
-              price={properties.price}
-              list={properties.list}
-              host={properties.host}
+              offer={properties}
             />
           </Route>
         </Switch>
