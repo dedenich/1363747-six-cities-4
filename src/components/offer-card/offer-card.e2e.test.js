@@ -1,7 +1,7 @@
 import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import OfferCard from './OfferCard.jsx';
+import OfferCard from './offer-card.jsx';
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -26,3 +26,19 @@ it(`should pass correct information to callback`, () => {
   expect(handleCardHover.mock.calls.length).toBe(1);
   expect(handleCardHover.mock.calls[0][0]).toBe(mockedEvent);
 });
+
+it(`should answer to a click`, () => {
+  const handleHeadingClick = jest.fn();
+  const handleCardHover = jest.fn();
+  const card = shallow(
+      <OfferCard
+        offer={mockOffer}
+        onCardHover={handleCardHover}
+        onHeadingClick={handleHeadingClick}
+      />
+  );
+  const heading = card.find(`h2`);
+  heading.simulate(`click`);
+  expect(handleHeadingClick).toHaveBeenCalledTimes(1);
+});
+

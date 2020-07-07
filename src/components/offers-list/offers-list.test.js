@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import OffersList from './OffersList.jsx';
+import OffersList from './offers-list.jsx';
 
 const mockOffersList = [
   {
