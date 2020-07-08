@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import OffersList from "../offers-list/offers-list.jsx";
 
 const Main = (props) => {
-  const {offersCount, offers, handleClick, onHeadingClick} = props;
+  const {offersCount, offers, handleClick} = props;
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -89,7 +89,6 @@ const Main = (props) => {
               </form>
               <OffersList
                 offers={offers}
-                onHeadingClick={onHeadingClick}
               />
             </section>
             <div className="cities__right-section">
