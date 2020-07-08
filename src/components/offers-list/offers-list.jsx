@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
-import OfferCard from '../offerCard/OfferCard.jsx';
+import OfferCard from '../offer-card/offer-card.jsx';
 
 export default class OffersList extends PureComponent {
   constructor(props) {
@@ -11,18 +11,17 @@ export default class OffersList extends PureComponent {
     this.handleCardHover = this.handleCardHover.bind(this);
   }
 
-  handleCardHover(evt) {
-    this.setState(() => ({activeCard: evt.target}));
-  }
+  handleCardHover() {}
 
   render() {
-    const {offers} = this.props;
+    const {offers, onHeadingClick} = this.props;
     return (
       <div className="cities__places-list places__list tabs__content">
         {offers.map((item, i) => (
           <OfferCard key={`card` + i}
             offer={item}
             onCardHover={this.handleCardHover}
+            onHeadingClick={onHeadingClick}
           />
         ))}
       </div>
@@ -40,4 +39,5 @@ OffersList.propTypes = {
       }).isRequired
   ).isRequired,
   onCardHover: PropTypes.func,
+  onHeadingClick: PropTypes.func,
 };

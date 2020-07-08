@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
+
 import OffersList from "../offersList/OffersList.jsx";
 import Map from "../map/map.jsx";
 
@@ -91,6 +92,7 @@ const Main = (props) => {
               </form>
               <OffersList
                 offers={offers}
+                onHeadingClick={onHeadingClick}
               />
             </section>
             <div className="cities__right-section">
@@ -115,7 +117,8 @@ Main.propTypes = {
         coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
       }).isRequired
   ).isRequired,
-  handleClick: PropTypes.func
+  handleClick: PropTypes.func,
+  onHeadingClick: PropTypes.func
 };
 
 export default Main;
