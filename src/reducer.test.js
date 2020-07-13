@@ -2,31 +2,6 @@ import {reducer, ActionType, ActionCreator} from "./reducer.js";
 import offers from './mocks/offers.js';
 import properties from './mocks/properties.js';
 
-const mockOffersList = [
-  {
-    caption: `Capion 1`,
-    src: `https://path`,
-    price: 100,
-    coordinates: [12, 12],
-    city: `Moskow`
-  },
-  {
-    caption: `Capion 2`,
-    src: `https://path`,
-    price: 160,
-    coordinates: [12, 12],
-    city: `Bern`
-  },
-  {
-    caption: `Capion 3`,
-    src: `https://path`,
-    price: 90,
-    coordinates: [12, 12],
-    city: `Berlin`
-  },
-];
-
-
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
     city: null,
