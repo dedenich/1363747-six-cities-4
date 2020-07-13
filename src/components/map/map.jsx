@@ -1,12 +1,11 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
-import configireMap from "./map-config.js";
+import configireMap, {updateMarkers} from "./map-config.js";
 
 export default class Map extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.places = this.props.places;
   }
 
   render() {
@@ -16,7 +15,13 @@ export default class Map extends PureComponent {
   }
 
   componentDidMount() {
-    configireMap(this.places);
+    const {places} = this.props;
+    configireMap(places);
+  }
+
+  componentDidUpdate() {
+    const {places} = this.props;
+    updateMarkers(places);
   }
 }
 

@@ -13,18 +13,21 @@ const mockOffersList = [
     src: `https://path`,
     price: 100,
     coordinates: [12, 12],
+    city: `1`
   },
   {
     caption: `Capion 2`,
     src: `https://path`,
     price: 160,
     coordinates: [12, 12],
+    city: `1`
   },
   {
     caption: `Capion 3`,
     src: `https://path`,
     price: 90,
     coordinates: [12, 12],
+    city: `1`
   },
 ];
 
@@ -32,9 +35,12 @@ it(`should detect when header is pressed`, () => {
   const onHeaderClick = jest.fn();
   const main = shallow(
       <Main
+        city={`Moskow`}
         offersCount={123}
         offers={mockOffersList}
         handleClick={onHeaderClick}
+        onCityClick={jest.fn()}
+        cities={[`1`, `2`]}
       />
   );
   const header = main.find(`b.places__found`);

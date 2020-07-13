@@ -1,11 +1,14 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer.js";
 import PropertyScreen from "../property-screen/property-screen.jsx";
 import Main from "../main/Main.jsx";
 import mockProperties from "../../mocks/properties.js";
+import pt from './../property-screen/property-screen-pt.jsx';
 
-export default class App extends PureComponent {
+class App extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -14,16 +17,29 @@ export default class App extends PureComponent {
     };
 
     this.handleHeadingClick = this.handleHeadingClick.bind(this);
+    this.handleCityClick = this.handleCityClick.bind(this);
   }
 
   handleHeadingClick(item) {
     return this.setState({currentOffer: item});
   }
 
+  handleCityClick(city) {
+    const {onCityClick} = this.props;
+    onCityClick(city);
+  }
+
   _renderApp() {
-    const {currentOffer} = this.state;
-    const {offersCount, offers} = this.props;
-    const properties = mockProperties;
+    const {offers,
+      currentOffer,
+      properties,
+      onCityClick,
+      city,
+      allOffers
+    } = this.props;
+
+    let cities = new Set(allOffers.map((it) => (it.city)));
+    const offersCount = offers.length;
     if (currentOffer !== null) {
       return (
         <PropertyScreen
@@ -33,9 +49,12 @@ export default class App extends PureComponent {
     } else {
       return (
         <Main
+          city={city}
           offersCount={offersCount}
           offers={offers}
           onHeadingClick={this.handleHeadingClick}
+          onCityClick={onCityClick}
+          cities={[...cities]}
         />
       );
     }
@@ -61,7 +80,13 @@ export default class App extends PureComponent {
 }
 
 App.propTypes = {
-  offersCount: PropTypes.number.isRequired,
+  allOffers: PropTypes.arrayOf(
+      PropTypes.shape({
+        caption: PropTypes.string.isRequired,
+        src: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+      }).isRequired
+  ),
   offers: PropTypes.arrayOf(
       PropTypes.shape({
         caption: PropTypes.string.isRequired,
@@ -69,4 +94,27 @@ App.propTypes = {
         price: PropTypes.number.isRequired,
       }).isRequired
   ).isRequired,
+  currentOffer: PropTypes.string,
+  properties: pt,
+  onCityClick: PropTypes.func.isRequired,
+  city: PropTypes.string,
 };
+
+const mapStateToProps = (state) => ({
+  currentOffer: state.currentOffer,
+  offers: state.offers,
+  allOffers: state.allOffers,
+  properties: state.properties,
+  city: state.city,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onCityClick(e) {
+    dispatch(ActionCreator.changeCity(e.target.textContent));
+    dispatch(ActionCreator.getOffers(e.target.textContent));
+  },
+});
+
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);
