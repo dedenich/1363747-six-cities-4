@@ -33,17 +33,13 @@ const mockOffersList = [
 it(`renders correctly`, () => {
   const store = mockStore({
     city: `Moskow`,
+    offers: mockOffersList,
+    allOffers: mockOffersList,
+    handleClick: jest.fn(),
   });
   const tree = renderer.create(
       <Provider store={store}>
-        <Main
-          city={`Moskow`}
-          offersCount={123}
-          offers={mockOffersList}
-          onHeadingClick={jest.fn()}
-          onCityClick={jest.fn()}
-          cities={[`1`, `2`]}
-        />
+        <Main/>
       </Provider>)
   .toJSON();
   expect(tree).toMatchSnapshot();

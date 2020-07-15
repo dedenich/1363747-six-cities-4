@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from 'prop-types';
-
+import {connect} from "react-redux";
 import OffersList from "../offers-list/offers-list.jsx";
 import Map from "../map/map.jsx";
 import CitiesList from "../cities-list/cities-list.jsx";
 
 const Main = (props) => {
-  const {offersCount, offers, handleClick, city, cities} = props;
-  const places = offers.map((it) => (it.coordinates));
+  const {offers, handleClick, city} = props;
+  const offersCount = offers.length;
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -37,9 +37,7 @@ const Main = (props) => {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <CitiesList
-              cities={cities}
-            />
+            <CitiesList/>
           </section>
         </div>
         <div className="cities">
@@ -62,14 +60,10 @@ const Main = (props) => {
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
               </form>
-              <OffersList
-                offers={offers}
-              />
+              <OffersList/>
             </section>
             <div className="cities__right-section">
-              <Map
-                places={places}
-              />
+              <Map/>
             </div>
           </div>
         </div>
@@ -80,8 +74,6 @@ const Main = (props) => {
 
 Main.propTypes = {
   city: PropTypes.string,
-  offersCount: PropTypes.number.isRequired,
-  cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   offers: PropTypes.arrayOf(
       PropTypes.shape({
         caption: PropTypes.string.isRequired,
@@ -95,4 +87,12 @@ Main.propTypes = {
   onHeadingClick: PropTypes.func
 };
 
-export default Main;
+const mapStateToProps = (state) => ({
+  currentOffer: state.currentOffer,
+  offers: state.offers,
+  city: state.city,
+  onHeadingClick: state.onHeadingClick,
+});
+
+export {Main};
+export default connect(mapStateToProps)(Main);

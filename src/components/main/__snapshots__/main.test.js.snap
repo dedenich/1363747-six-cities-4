@@ -89,19 +89,6 @@ exports[`renders correctly 1`] = `
                 </span>
               </a>
             </li>
-            <li
-              className="locations__item"
-              onClick={[Function]}
-            >
-              <a
-                className="locations__item-link tabs__item"
-                href="#"
-              >
-                <span>
-                  2
-                </span>
-              </a>
-            </li>
           </ul>
         </section>
       </section>
@@ -123,7 +110,7 @@ exports[`renders correctly 1`] = `
           <b
             className="places__found"
           >
-            123
+            3
              places to stay in 
             Moskow
           </b>

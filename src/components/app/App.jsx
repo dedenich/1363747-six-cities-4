@@ -21,27 +21,17 @@ class App extends PureComponent {
   }
 
   _renderApp() {
-    const {offers,
+    const {
       currentOffer,
-      city,
-      allOffers
     } = this.props;
 
-    let cities = new Set(allOffers.map((it) => (it.city)));
-    const offersCount = offers.length;
     if (currentOffer !== null) {
       return (
         <PropertyScreen/>
       );
     } else {
       return (
-        <Main
-          city={city}
-          offersCount={offersCount}
-          offers={offers}
-          onHeadingClick={this.handleHeadingClick}
-          cities={[...cities]}
-        />
+        <Main/>
       );
     }
   }
@@ -86,6 +76,7 @@ const mapStateToProps = (state) => ({
   offers: state.offers,
   allOffers: state.allOffers,
   city: state.city,
+  onHeadingClick: state.onHeadingClick,
 });
 
 

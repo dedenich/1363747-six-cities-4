@@ -1,8 +1,9 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
+import {connect} from "react-redux";
 import configireMap, {updateMarkers} from "./map-config.js";
 
-export default class Map extends PureComponent {
+export class Map extends PureComponent {
 
   constructor(props) {
     super(props);
@@ -15,16 +16,32 @@ export default class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const {places} = this.props;
+    const {offers} = this.props;
+    const places = offers.map((it) => (it.coordinates));
     configireMap(places);
   }
 
   componentDidUpdate() {
-    const {places} = this.props;
+    const {offers} = this.props;
+    const places = offers.map((it) => (it.coordinates));
     updateMarkers(places);
   }
 }
 
 Map.propTypes = {
-  places: PropTypes.arrayOf(PropTypes.array).isRequired,
+  offers: PropTypes.arrayOf(
+      PropTypes.shape({
+        caption: PropTypes.string.isRequired,
+        src: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
+        city: PropTypes.string.isRequired,
+      }).isRequired
+  ).isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+});
+
+export default connect(mapStateToProps)(Map);

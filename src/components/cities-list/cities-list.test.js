@@ -6,25 +6,38 @@ import configureStore from "redux-mock-store";
 
 const mockStore = configureStore([]);
 
-const mockCities = [
-  `Дмитров`,
-  `Долгопрудный`,
-  `Домодедово`,
-  `Донской`,
-  `Дубна`,
-  `Евпатория`,
+const mockOffersList = [
+  {
+    caption: `Capion 1`,
+    src: `https://path`,
+    price: 100,
+    coordinates: [12, 12],
+    city: `1`
+  },
+  {
+    caption: `Capion 2`,
+    src: `https://path`,
+    price: 160,
+    coordinates: [12, 12],
+    city: `1`
+  },
+  {
+    caption: `Capion 3`,
+    src: `https://path`,
+    price: 90,
+    coordinates: [12, 12],
+    city: `1`
+  },
 ];
 
 it(`renders correctly`, () => {
   const store = mockStore({
-    onCityClick: jest.fn(),
+    allOffers: mockOffersList,
   });
 
   const tree = renderer.create(
       <Provider store={store}>
-        <CitiesList
-          cities={mockCities}
-        />
+        <CitiesList/>
       </Provider>
   )
   .toJSON();

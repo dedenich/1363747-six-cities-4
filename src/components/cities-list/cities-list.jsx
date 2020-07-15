@@ -4,11 +4,12 @@ import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer.js";
 
 const CitiesList = (props) => {
-  const {cities, onCityClick} = props;
+  const {allOffers, onCityClick} = props;
+  let cities = new Set(allOffers.map((it) => (it.city)));
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
-        {cities.map((it, i) => (
+        {[...cities].map((it, i) => (
           <li className="locations__item" key={it + i} onClick={onCityClick}>
             <a className="locations__item-link tabs__item" href="#">
               <span>{it}</span>
@@ -21,13 +22,20 @@ const CitiesList = (props) => {
 };
 
 CitiesList.propTypes = {
-  cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   onCityClick: PropTypes.func,
+  allOffers: PropTypes.arrayOf(
+      PropTypes.shape({
+        caption: PropTypes.string.isRequired,
+        src: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+      }).isRequired
+  ),
 };
 
 
 const mapStateToProps = (state) => ({
   onCityClick: state.onCityClick,
+  allOffers: state.allOffers,
 });
 
 

@@ -16,72 +16,7 @@ exports[`renders correctly 1`] = `
         href="#"
       >
         <span>
-          Дмитров
-        </span>
-      </a>
-    </li>
-    <li
-      className="locations__item"
-      onClick={[Function]}
-    >
-      <a
-        className="locations__item-link tabs__item"
-        href="#"
-      >
-        <span>
-          Долгопрудный
-        </span>
-      </a>
-    </li>
-    <li
-      className="locations__item"
-      onClick={[Function]}
-    >
-      <a
-        className="locations__item-link tabs__item"
-        href="#"
-      >
-        <span>
-          Домодедово
-        </span>
-      </a>
-    </li>
-    <li
-      className="locations__item"
-      onClick={[Function]}
-    >
-      <a
-        className="locations__item-link tabs__item"
-        href="#"
-      >
-        <span>
-          Донской
-        </span>
-      </a>
-    </li>
-    <li
-      className="locations__item"
-      onClick={[Function]}
-    >
-      <a
-        className="locations__item-link tabs__item"
-        href="#"
-      >
-        <span>
-          Дубна
-        </span>
-      </a>
-    </li>
-    <li
-      className="locations__item"
-      onClick={[Function]}
-    >
-      <a
-        className="locations__item-link tabs__item"
-        href="#"
-      >
-        <span>
-          Евпатория
+          1
         </span>
       </a>
     </li>

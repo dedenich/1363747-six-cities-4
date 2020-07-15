@@ -1,8 +1,9 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
+import {connect} from "react-redux";
 import OfferCard from '../offer-card/offer-card.jsx';
 
-export default class OffersList extends PureComponent {
+export class OffersList extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -41,3 +42,10 @@ OffersList.propTypes = {
   onCardHover: PropTypes.func,
   onHeadingClick: PropTypes.func,
 };
+
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+  onHeadingClick: state.onHeadingClick,
+});
+
+export default connect(mapStateToProps)(OffersList);
