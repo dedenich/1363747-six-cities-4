@@ -78,7 +78,7 @@ exports[`renders correctly 1`] = `
           >
             <li
               className="locations__item"
-              onClick={[MockFunction]}
+              onClick={[Function]}
             >
               <a
                 className="locations__item-link tabs__item"
@@ -91,7 +91,7 @@ exports[`renders correctly 1`] = `
             </li>
             <li
               className="locations__item"
-              onClick={[MockFunction]}
+              onClick={[Function]}
             >
               <a
                 className="locations__item-link tabs__item"

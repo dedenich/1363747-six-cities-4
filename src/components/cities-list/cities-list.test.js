@@ -1,6 +1,10 @@
 import React from 'react';
-import CitieList from './cities-list.jsx';
+import CitiesList from './cities-list.jsx';
 import renderer from 'react-test-renderer';
+import {Provider} from 'react-redux';
+import configureStore from "redux-mock-store";
+
+const mockStore = configureStore([]);
 
 const mockCities = [
   `Дмитров`,
@@ -12,9 +16,17 @@ const mockCities = [
 ];
 
 it(`renders correctly`, () => {
-  const tree = renderer.create(<CitieList
-    cities={mockCities}
-  />)
+  const store = mockStore({
+    onCityClick: jest.fn(),
+  });
+
+  const tree = renderer.create(
+      <Provider store={store}>
+        <CitiesList
+          cities={mockCities}
+        />
+      </Provider>
+  )
   .toJSON();
   expect(tree).toMatchSnapshot();
 });

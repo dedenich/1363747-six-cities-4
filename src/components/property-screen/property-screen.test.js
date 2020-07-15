@@ -1,6 +1,10 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import PropertyScreen from './property-screen.jsx';
+import {Provider} from 'react-redux';
+import configureStore from "redux-mock-store";
+
+const mockStore = configureStore([]);
 
 const mockProperties = {
   photos: [
@@ -32,11 +36,15 @@ const mockProperties = {
 };
 
 it(`renders correctly`, () => {
+  const store = mockStore({
+    properties: mockProperties,
+  });
+
   const tree = renderer
   .create(
-      <PropertyScreen
-        offer={mockProperties}
-      />
+      <Provider store={store}>
+        <PropertyScreen/>
+      </Provider>
   )
   .toJSON();
   expect(tree).toMatchSnapshot();

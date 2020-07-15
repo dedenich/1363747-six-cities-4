@@ -6,7 +6,7 @@ import Map from "../map/map.jsx";
 import CitiesList from "../cities-list/cities-list.jsx";
 
 const Main = (props) => {
-  const {offersCount, offers, handleClick, onCityClick, city, cities} = props;
+  const {offersCount, offers, handleClick, city, cities} = props;
   const places = offers.map((it) => (it.coordinates));
   return (
     <div className="page page--gray page--main">
@@ -39,7 +39,6 @@ const Main = (props) => {
           <section className="locations container">
             <CitiesList
               cities={cities}
-              onCityClick={onCityClick}
             />
           </section>
         </div>
@@ -92,7 +91,6 @@ Main.propTypes = {
         city: PropTypes.string.isRequired,
       }).isRequired
   ).isRequired,
-  onCityClick: PropTypes.func,
   handleClick: PropTypes.func,
   onHeadingClick: PropTypes.func
 };
