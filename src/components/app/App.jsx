@@ -53,30 +53,11 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  allOffers: PropTypes.arrayOf(
-      PropTypes.shape({
-        caption: PropTypes.string.isRequired,
-        src: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-      }).isRequired
-  ),
-  offers: PropTypes.arrayOf(
-      PropTypes.shape({
-        caption: PropTypes.string.isRequired,
-        src: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-      }).isRequired
-  ).isRequired,
   currentOffer: PropTypes.string,
-  city: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
   currentOffer: state.currentOffer,
-  offers: state.offers,
-  allOffers: state.allOffers,
-  city: state.city,
-  onHeadingClick: state.onHeadingClick,
 });
 
 

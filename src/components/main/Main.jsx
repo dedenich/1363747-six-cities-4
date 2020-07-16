@@ -84,11 +84,9 @@ Main.propTypes = {
       }).isRequired
   ).isRequired,
   handleClick: PropTypes.func,
-  onHeadingClick: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
-  currentOffer: state.currentOffer,
   offers: state.offers,
   city: state.city,
   onHeadingClick: state.onHeadingClick,
