@@ -13,6 +13,7 @@ it(`renders correctly`, () => {
   .create(<OfferCard
     offer={mockOffer}
     onCardHover={jest.fn()}
+    handleChange={jest.fn()}
   />)
   .toJSON();
   expect(tree).toMatchSnapshot();

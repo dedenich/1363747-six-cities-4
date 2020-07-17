@@ -6,22 +6,16 @@ import OfferCard from '../offer-card/offer-card.jsx';
 export class OffersList extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      activeCard: null,
-    };
-    this.handleCardHover = this.handleCardHover.bind(this);
   }
 
-  handleCardHover() {}
-
   render() {
-    const {offers, onHeadingClick} = this.props;
+    const {offers, handleChange, onHeadingClick} = this.props;
     return (
       <div className="cities__places-list places__list tabs__content">
         {offers.map((item, i) => (
           <OfferCard key={`card` + i}
             offer={item}
-            onCardHover={this.handleCardHover}
+            handleChange={handleChange}
             onHeadingClick={onHeadingClick}
           />
         ))}
@@ -39,6 +33,7 @@ OffersList.propTypes = {
         price: PropTypes.number.isRequired,
       }).isRequired
   ).isRequired,
+  handleChange: PropTypes.func,
   onCardHover: PropTypes.func,
   onHeadingClick: PropTypes.func,
 };

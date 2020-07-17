@@ -81,10 +81,12 @@ exports[`renders correctly 1`] = `
               onClick={[Function]}
             >
               <a
-                className="locations__item-link tabs__item"
+                className="locations__item-link tabs__item "
                 href="#"
               >
-                <span>
+                <span
+                  onClick={[Function]}
+                >
                   1
                 </span>
               </a>

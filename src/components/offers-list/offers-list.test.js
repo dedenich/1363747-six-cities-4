@@ -32,7 +32,9 @@ it(`renders correctly`, () => {
   const tree = renderer
   .create(
       <Provider store={store}>
-        <OffersList/>
+        <OffersList
+          handleChange={jest.fn()}
+        />
       </Provider>
   )
   .toJSON();

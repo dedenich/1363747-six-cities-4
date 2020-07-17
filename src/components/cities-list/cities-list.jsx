@@ -1,27 +1,35 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer.js";
 
-const CitiesList = (props) => {
-  const {allOffers, onCityClick} = props;
-  let cities = new Set(allOffers.map((it) => (it.city)));
-  return (
-    <section className="locations container">
-      <ul className="locations__list tabs__list">
-        {[...cities].map((it, i) => (
-          <li className="locations__item" key={it + i} onClick={onCityClick}>
-            <a className="locations__item-link tabs__item" href="#">
-              <span>{it}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </section>
-  );
-};
+class CitiesList extends PureComponent {
 
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const {allOffers, handleChange, onCityClick, activeItem} = this.props;
+    let cities = new Set(allOffers.map((it) => (it.city)));
+    return (
+      <section className="locations container">
+        <ul className="locations__list tabs__list">
+          {[...cities].map((it, i) => (
+            <li className="locations__item" key={it + i} onClick={onCityClick}>
+              <a className={`locations__item-link tabs__item ${it === activeItem ? `tabs__item--active` : ``}`} href="#">
+                <span onClick={handleChange}>{it}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    );
+  }
+}
 CitiesList.propTypes = {
+  activeItem: PropTypes.string,
+  handleChange: PropTypes.func,
   onCityClick: PropTypes.func,
   allOffers: PropTypes.arrayOf(
       PropTypes.shape({
