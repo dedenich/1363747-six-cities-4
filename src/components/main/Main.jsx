@@ -5,6 +5,7 @@ import OffersList from "../offers-list/offers-list.jsx";
 import Map from "../map/map.jsx";
 import CitiesList from "../cities-list/cities-list.jsx";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
+import {ActionCreator} from "../../reducer.js";
 
 const CitiesListWrapped = withActiveItem(CitiesList);
 const OffersListWrapped = withActiveItem(OffersList);
@@ -13,6 +14,10 @@ class Main extends PureComponent {
 
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    this.props.getCities();
   }
 
   render() {
@@ -85,6 +90,7 @@ class Main extends PureComponent {
 
 Main.propTypes = {
   city: PropTypes.string,
+  getCities: PropTypes.func.isRequired,
   offers: PropTypes.arrayOf(
       PropTypes.shape({
         caption: PropTypes.string.isRequired,
@@ -103,5 +109,11 @@ const mapStateToProps = (state) => ({
   onHeadingClick: state.onHeadingClick,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  getCities() {
+    dispatch(ActionCreator.getCities());
+  },
+});
+
 export {Main};
-export default connect(mapStateToProps)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

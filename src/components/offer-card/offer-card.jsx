@@ -7,10 +7,10 @@ export default class OfferCard extends PureComponent {
   }
 
   render() {
-    const {offer, handleChange, onHeadingClick} = this.props;
+    const {offer, handleActiveChange, onHeadingClick} = this.props;
     const {caption, src, price} = offer;
     return (
-      <article className="cities__place-card place-card" onMouseEnter={handleChange}>
+      <article className="cities__place-card place-card" onMouseEnter={handleActiveChange}>
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
@@ -54,6 +54,6 @@ OfferCard.propTypes = {
     src: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
   }).isRequired,
-  handleChange: PropTypes.func.isRequired,
+  handleActiveChange: PropTypes.func.isRequired,
   onHeadingClick: PropTypes.func,
 };

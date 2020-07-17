@@ -33,7 +33,7 @@ it(`renders correctly`, () => {
   .create(
       <Provider store={store}>
         <OffersList
-          handleChange={jest.fn()}
+          handleActiveChange={jest.fn()}
         />
       </Provider>
   )

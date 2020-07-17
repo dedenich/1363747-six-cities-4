@@ -10,15 +10,14 @@ class CitiesList extends PureComponent {
   }
 
   render() {
-    const {allOffers, handleChange, onCityClick, activeItem} = this.props;
-    let cities = new Set(allOffers.map((it) => (it.city)));
+    const {handleActiveChange, onCityClick, activeItem, cities} = this.props;
     return (
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          {[...cities].map((it, i) => (
+          {!cities ? `` : [...cities].map((it, i) => (
             <li className="locations__item" key={it + i} onClick={onCityClick}>
               <a className={`locations__item-link tabs__item ${it === activeItem ? `tabs__item--active` : ``}`} href="#">
-                <span onClick={handleChange}>{it}</span>
+                <span onClick={handleActiveChange}>{it}</span>
               </a>
             </li>
           ))}
@@ -27,9 +26,11 @@ class CitiesList extends PureComponent {
     );
   }
 }
+
 CitiesList.propTypes = {
+  cities: PropTypes.object,
   activeItem: PropTypes.string,
-  handleChange: PropTypes.func,
+  handleActiveChange: PropTypes.func,
   onCityClick: PropTypes.func,
   allOffers: PropTypes.arrayOf(
       PropTypes.shape({
@@ -40,10 +41,9 @@ CitiesList.propTypes = {
   ),
 };
 
-
 const mapStateToProps = (state) => ({
   onCityClick: state.onCityClick,
-  allOffers: state.allOffers,
+  cities: state.cities,
 });
 
 

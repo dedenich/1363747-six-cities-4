@@ -15,30 +15,30 @@ const mockOffer = {
 
 it(`should pass correct information to callback`, () => {
   const handleCardHover = jest.fn();
-  const handleChange = jest.fn();
+  const handleActiveChange = jest.fn();
   const mockedEvent = {target: {}};
   const card = shallow(
       <OfferCard
         offer={mockOffer}
         onCardHover={handleCardHover}
-        handleChange={handleChange}
+        handleActiveChange={handleActiveChange}
       />
   );
   card.simulate(`mouseEnter`, mockedEvent);
-  expect(handleChange.mock.calls.length).toBe(1);
-  expect(handleChange.mock.calls[0][0]).toBe(mockedEvent);
+  expect(handleActiveChange.mock.calls.length).toBe(1);
+  expect(handleActiveChange.mock.calls[0][0]).toBe(mockedEvent);
 });
 
 it(`should answer to a click`, () => {
   const handleHeadingClick = jest.fn();
-  const handleChange = jest.fn();
+  const handleActiveChange = jest.fn();
   const handleCardHover = jest.fn();
   const card = shallow(
       <OfferCard
         offer={mockOffer}
         onCardHover={handleCardHover}
         onHeadingClick={handleHeadingClick}
-        handleChange={handleChange}
+        handleActiveChange={handleActiveChange}
       />
   );
   const heading = card.find(`h2`);

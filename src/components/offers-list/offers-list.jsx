@@ -9,13 +9,13 @@ export class OffersList extends PureComponent {
   }
 
   render() {
-    const {offers, handleChange, onHeadingClick} = this.props;
+    const {offers, handleActiveChange, onHeadingClick} = this.props;
     return (
       <div className="cities__places-list places__list tabs__content">
         {offers.map((item, i) => (
           <OfferCard key={`card` + i}
             offer={item}
-            handleChange={handleChange}
+            handleActiveChange={handleActiveChange}
             onHeadingClick={onHeadingClick}
           />
         ))}
@@ -33,7 +33,7 @@ OffersList.propTypes = {
         price: PropTypes.number.isRequired,
       }).isRequired
   ).isRequired,
-  handleChange: PropTypes.func,
+  handleActiveChange: PropTypes.func,
   onCardHover: PropTypes.func,
   onHeadingClick: PropTypes.func,
 };

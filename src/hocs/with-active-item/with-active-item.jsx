@@ -8,10 +8,10 @@ const withActiveItem = (Component) => {
       this.state = {
         activeItem: ``,
       };
-      this.handleChange = this.handleChange.bind(this);
+      this.handleActiveChange = this.handleActiveChange.bind(this);
     }
 
-    handleChange(evt) {
+    handleActiveChange(evt) {
       this.setState({
         activeItem: evt.target.textContent,
       });
@@ -21,16 +21,10 @@ const withActiveItem = (Component) => {
       return (
         <Component
           {...this.props}
-          handleChange={this.handleChange}
+          handleActiveChange={this.handleActiveChange}
           activeItem={this.state.activeItem}
         />
       );
-    }
-
-    componentWillUnmount() {
-      this.setState({
-        activeItem: null
-      });
     }
   };
 };
