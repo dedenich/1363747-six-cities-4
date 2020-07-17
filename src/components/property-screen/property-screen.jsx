@@ -1,7 +1,8 @@
 import React, {PureComponent} from "react";
+import {connect} from "react-redux";
 import pt from "./property-screen-pt.jsx";
 
-export default class PropretyScreen extends PureComponent {
+class PropretyScreen extends PureComponent {
   constructor(props) {
     super(props);
   }
@@ -288,3 +289,11 @@ export default class PropretyScreen extends PureComponent {
 }
 
 PropretyScreen.propTypes = pt;
+
+const mapStateToProps = (state) => ({
+  offer: state.properties,
+});
+
+
+export {PropretyScreen};
+export default connect(mapStateToProps)(PropretyScreen);

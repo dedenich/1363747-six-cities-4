@@ -1,11 +1,11 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {connect} from "react-redux";
 import PropertyScreen from "../property-screen/property-screen.jsx";
 import Main from "../main/Main.jsx";
-import mockProperties from "../../mocks/properties.js";
 
-export default class App extends PureComponent {
+class App extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -21,28 +21,22 @@ export default class App extends PureComponent {
   }
 
   _renderApp() {
-    const {currentOffer} = this.state;
-    const {offersCount, offers} = this.props;
-    const properties = mockProperties;
+    const {
+      currentOffer,
+    } = this.props;
+
     if (currentOffer !== null) {
       return (
-        <PropertyScreen
-          offer={properties}
-        />
+        <PropertyScreen/>
       );
     } else {
       return (
-        <Main
-          offersCount={offersCount}
-          offers={offers}
-          onHeadingClick={this.handleHeadingClick}
-        />
+        <Main/>
       );
     }
   }
 
   render() {
-    const properties = mockProperties;
     return (
       <BrowserRouter>
         <Switch>
@@ -50,9 +44,7 @@ export default class App extends PureComponent {
             {this._renderApp()}
           </Route>
           <Route exact path="/offer">
-            <PropertyScreen
-              offer={properties}
-            />
+            <PropertyScreen/>
           </Route>
         </Switch>
       </BrowserRouter>
@@ -61,12 +53,13 @@ export default class App extends PureComponent {
 }
 
 App.propTypes = {
-  offersCount: PropTypes.number.isRequired,
-  offers: PropTypes.arrayOf(
-      PropTypes.shape({
-        caption: PropTypes.string.isRequired,
-        src: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-      }).isRequired
-  ).isRequired,
+  currentOffer: PropTypes.string,
 };
+
+const mapStateToProps = (state) => ({
+  currentOffer: state.currentOffer,
+});
+
+
+export {App};
+export default connect(mapStateToProps)(App);

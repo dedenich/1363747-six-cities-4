@@ -1,16 +1,18 @@
 import leaflet from 'leaflet';
 
+let map; let icon; let _markers = [];
+
 const configureMap = (places) => {
 
   const city = [52.38333, 4.9];
-  const icon = leaflet.icon({
+  icon = leaflet.icon({
     iconUrl: `img/pin.svg`,
     iconSize: [30, 30]
   });
   const zoom = 12;
 
   if (document.getElementById(`map`)) {
-    const map = leaflet.map(`map`, {
+    map = leaflet.map(`map`, {
       center: city,
       zoom,
       zoomControl: false,
@@ -25,11 +27,25 @@ const configureMap = (places) => {
       .addTo(map);
 
     places.forEach((el) => {
-      leaflet
+      let lMarker = leaflet
       .marker(el, {icon})
       .addTo(map);
+      _markers.push(lMarker);
     });
   }
+};
+
+export const updateMarkers = (places) => {
+  _markers.forEach((el) => {
+    el.removeFrom(map);
+  });
+
+  places.forEach((el) => {
+    let lMarker = leaflet
+      .marker(el, {icon})
+      .addTo(map);
+    _markers.push(lMarker);
+  });
 };
 
 export default configureMap;
