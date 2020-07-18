@@ -6,6 +6,8 @@ import Map from "../map/map.jsx";
 import CitiesList from "../cities-list/cities-list.jsx";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 
+import {getCurrentCity, getOffers} from "../../reducers/offers/selectors.js";
+
 const CitiesListWrapped = withActiveItem(CitiesList);
 const OffersListWrapped = withActiveItem(OffersList);
 
@@ -98,8 +100,8 @@ Main.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
-  city: state.city,
+  offers: getOffers(state),
+  city: getCurrentCity(state),
   onHeadingClick: state.onHeadingClick,
 });
 

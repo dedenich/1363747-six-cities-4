@@ -2,6 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import configireMap, {updateMarkers} from "./map-config.js";
+import {getOffers} from "../../reducers/offers/selectors.js";
 
 export class Map extends PureComponent {
 
@@ -41,7 +42,7 @@ Map.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
+  offers: getOffers(state),
 });
 
 export default connect(mapStateToProps)(Map);

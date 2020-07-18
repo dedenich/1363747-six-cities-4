@@ -76,7 +76,36 @@ exports[`renders correctly 1`] = `
           <ul
             className="locations__list tabs__list"
           >
-            
+            <li
+              className="locations__item"
+              onClick={[Function]}
+            >
+              <a
+                className="locations__item-link tabs__item "
+                href="#"
+              >
+                <span
+                  onClick={[Function]}
+                >
+                  1
+                </span>
+              </a>
+            </li>
+            <li
+              className="locations__item"
+              onClick={[Function]}
+            >
+              <a
+                className="locations__item-link tabs__item "
+                href="#"
+              >
+                <span
+                  onClick={[Function]}
+                >
+                  2
+                </span>
+              </a>
+            </li>
           </ul>
         </section>
       </section>
@@ -100,7 +129,6 @@ exports[`renders correctly 1`] = `
           >
             4
              places to stay in 
-            Moskow
           </b>
           <form
             action="#"

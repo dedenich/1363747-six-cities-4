@@ -1,11 +1,9 @@
-import {reducer, ActionType, ActionCreator, AuthorizationStatus} from "./reducer.js";
+import {reducer, ActionType, ActionCreator} from "./offers.js";
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
     city: null,
     currentOffer: null,
-    authorizationStatus: AuthorizationStatus.NO_AUTH,
-    authInfo: null,
     offers: [],
     properties: [],
   });
@@ -15,8 +13,6 @@ it(`Reducer should increment change city by a given value`, () => {
   expect(reducer({
     city: null,
     currentOffer: null,
-    authorizationStatus: AuthorizationStatus.NO_AUTH,
-    authInfo: null,
     offers: [],
     properties: [],
   }, {
@@ -25,8 +21,6 @@ it(`Reducer should increment change city by a given value`, () => {
   })).toEqual({
     city: `Voronezh`,
     currentOffer: null,
-    authorizationStatus: AuthorizationStatus.NO_AUTH,
-    authInfo: null,
     offers: [],
     properties: [],
   });

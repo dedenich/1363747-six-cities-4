@@ -6,6 +6,9 @@ import {Provider} from 'react-redux';
 import configureStore from "redux-mock-store";
 import mockOffersList from "../../mocks/offers.js";
 
+import NameSpace from '../../reducers/namespace.js';
+import {AuthorizationStatus} from "../../const.js";
+
 const mockStore = configureStore([]);
 
 Enzyme.configure({
@@ -15,10 +18,14 @@ Enzyme.configure({
 it(`should detect when header is pressed`, () => {
   const onHeaderClick = jest.fn();
   const store = mockStore({
-    city: `Moskow`,
-    offers: mockOffersList,
-    allOffers: mockOffersList,
-    handleClick: onHeaderClick,
+    [NameSpace.USER]: {
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
+    },
+    [NameSpace.OFFERS]: {
+      offers: mockOffersList,
+      cities: new Set([`1`, `2`]),
+      currentCity: `Brussels`,
+    },
   });
   const main = mount(
       <Provider store={store}>

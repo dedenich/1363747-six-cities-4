@@ -5,18 +5,21 @@ import configureStore from "redux-mock-store";
 import Map from './map.jsx';
 import mockOffersList from "../../mocks/offers.js";
 
-const mockStore = configureStore([]);
+import NameSpace from '../../reducers/namespace.js';
+import {AuthorizationStatus} from "../../const.js";
 
-const mockPlacesList = [
-  [12, 12],
-  [11, 11],
-  [13, 12],
-];
+const mockStore = configureStore([]);
 
 it(`renders correctly`, () => {
   const store = mockStore({
-    places: mockPlacesList,
-    offers: mockOffersList,
+    [NameSpace.USER]: {
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
+    },
+    [NameSpace.OFFERS]: {
+      offers: mockOffersList,
+      cities: new Set([`1`, `2`]),
+      currentCity: `Brussels`,
+    },
   });
   const tree = renderer
   .create(

@@ -5,7 +5,10 @@ import {connect} from "react-redux";
 
 import PropertyScreen from "../property-screen/property-screen.jsx";
 import Main from "../main/Main.jsx";
-import {Operation} from "./../../reducer.js";
+
+import {Operation as OfferOperation} from "../../reducers/offers/offers.js";
+
+import {getCurrentOffer} from "../../reducers/offers/selectors.js";
 
 class App extends PureComponent {
   constructor(props) {
@@ -31,7 +34,6 @@ class App extends PureComponent {
     const {
       currentOffer,
     } = this.props;
-
     if (currentOffer !== null) {
       return (
         <PropertyScreen/>
@@ -65,12 +67,12 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  currentOffer: state.currentOffer,
+  currentOffer: getCurrentOffer(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onLoadOffers() {
-    dispatch(Operation.loadOffers());
+    dispatch(OfferOperation.loadOffers());
   },
 });
 

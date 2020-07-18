@@ -4,6 +4,11 @@ import OffersList from './offers-list.jsx';
 import {Provider} from 'react-redux';
 import configureStore from "redux-mock-store";
 
+import NameSpace from '../../reducers/namespace.js';
+import {AuthorizationStatus} from "../../const.js";
+
+import mockStoreConf from "../../mocks/mock-store-conf.js";
+
 const mockStore = configureStore([]);
 
 const mockOffersList = [
@@ -25,10 +30,7 @@ const mockOffersList = [
 ];
 
 it(`renders correctly`, () => {
-  const store = mockStore({
-    offers: mockOffersList,
-    allOffers: mockOffersList,
-  });
+  const store = mockStore(mockStoreConf);
   const tree = renderer
   .create(
       <Provider store={store}>

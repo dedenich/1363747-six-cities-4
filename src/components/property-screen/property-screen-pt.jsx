@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
-import TYPES from '../../const.js';
+import {Types} from '../../const.js';
 
 const pt = PropTypes.shape({
   photos: PropTypes.arrayOf(PropTypes.string).isRequired,
   heading: PropTypes.string.isRequired,
   describtion: PropTypes.string.isRequired,
   premium: PropTypes.bool.isRequired,
-  type: PropTypes.oneOf(TYPES).isRequired,
+  type: PropTypes.oneOf(Types).isRequired,
   rating: PropTypes.number.isRequired,
   bedroomsNumber: PropTypes.number.isRequired,
   maxGuests: PropTypes.number.isRequired,
