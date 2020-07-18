@@ -35,7 +35,7 @@ Map.propTypes = {
         src: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
         coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
-        city: PropTypes.string.isRequired,
+        cityName: PropTypes.string.isRequired,
       }).isRequired
   ).isRequired,
 };

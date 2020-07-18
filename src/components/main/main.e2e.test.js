@@ -4,36 +4,13 @@ import Adapter from 'enzyme-adapter-react-16';
 import Main from './Main.jsx';
 import {Provider} from 'react-redux';
 import configureStore from "redux-mock-store";
+import mockOffersList from "../../mocks/offers.js";
 
 const mockStore = configureStore([]);
 
 Enzyme.configure({
   adapter: new Adapter(),
 });
-
-const mockOffersList = [
-  {
-    caption: `Capion 1`,
-    src: `https://path`,
-    price: 100,
-    coordinates: [12, 12],
-    city: `1`
-  },
-  {
-    caption: `Capion 2`,
-    src: `https://path`,
-    price: 160,
-    coordinates: [12, 12],
-    city: `1`
-  },
-  {
-    caption: `Capion 3`,
-    src: `https://path`,
-    price: 90,
-    coordinates: [12, 12],
-    city: `1`
-  },
-];
 
 it(`should detect when header is pressed`, () => {
   const onHeaderClick = jest.fn();

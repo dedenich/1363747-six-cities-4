@@ -50,7 +50,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onCityClick(e) {
     dispatch(ActionCreator.changeCity(e.target.textContent));
-    dispatch(ActionCreator.getOffers(e.target.textContent));
+    dispatch(ActionCreator.getOffersIn(e.target.textContent));
   },
 });
 

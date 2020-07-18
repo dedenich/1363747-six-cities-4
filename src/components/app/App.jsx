@@ -2,8 +2,10 @@ import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {connect} from "react-redux";
+
 import PropertyScreen from "../property-screen/property-screen.jsx";
 import Main from "../main/Main.jsx";
+import {Operation} from "./../../reducer.js";
 
 class App extends PureComponent {
   constructor(props) {
@@ -18,6 +20,11 @@ class App extends PureComponent {
 
   handleHeadingClick(item) {
     return this.setState({currentOffer: item});
+  }
+
+  componentDidMount() {
+    const {onLoadOffers} = this.props;
+    onLoadOffers();
   }
 
   _renderApp() {
@@ -54,12 +61,18 @@ class App extends PureComponent {
 
 App.propTypes = {
   currentOffer: PropTypes.string,
+  onLoadOffers: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
   currentOffer: state.currentOffer,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  onLoadOffers() {
+    dispatch(Operation.loadOffers());
+  },
+});
 
 export {App};
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
