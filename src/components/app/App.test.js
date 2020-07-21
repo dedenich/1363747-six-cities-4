@@ -12,11 +12,11 @@ const mockFn = jest.fn();
 
 it(`renders correctly`, () => {
   const store = mockStore({
-    city: `Moskow`,
-    currentOffer: `1`,
-    offers: mockOffersList,
-    allOffers: mockOffersList,
-    properties,
+    OFFERS: {city: `Moskow`,
+      currentOffer: `1`,
+      offers: mockOffersList,
+      allOffers: mockOffersList,
+      properties}
   });
   const tree = renderer
   .create(

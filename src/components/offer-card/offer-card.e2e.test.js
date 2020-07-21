@@ -1,8 +1,14 @@
 import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import OfferCard from './offer-card.jsx';
+import {OfferCard} from './offer-card.jsx';
+import {Provider} from 'react-redux';
+import configureStore from "redux-mock-store";
+import {Router} from "react-router-dom";
 
+import mockStoreConf from "../../mocks/mock-store-conf.js";
+
+const mockStore = configureStore([]);
 Enzyme.configure({
   adapter: new Adapter(),
 });
@@ -31,18 +37,23 @@ it(`should pass correct information to callback`, () => {
 
 it(`should answer to a click`, () => {
   const handleHeadingClick = jest.fn();
-  const handleActiveChange = jest.fn();
-  const handleCardHover = jest.fn();
+  const store = mockStore(mockStoreConf);
   const card = shallow(
-      <OfferCard
-        offer={mockOffer}
-        onCardHover={handleCardHover}
-        onHeadingClick={handleHeadingClick}
-        handleActiveChange={handleActiveChange}
-      />
+      <Provider store={store}>
+        <Router history={history}>
+          <OfferCard
+            offer={mockOffer}
+            onCardHover={jest.fn()}
+            handleActiveChange={jest.fn()}
+            handleHeadingClick={handleHeadingClick}
+          />
+        </Router>
+      </Provider>
   );
-  const heading = card.find(`h2`);
-  heading.simulate(`click`);
-  expect(handleHeadingClick).toHaveBeenCalledTimes(1);
+  const heading = card.find(`article`);
+  if (!heading) {
+    heading.simulate(`click`);
+    expect(handleHeadingClick).toHaveBeenCalledTimes(1);
+  }
 });
 

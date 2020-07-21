@@ -1,6 +1,12 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import OfferCard from './offer-card.jsx';
+import {Provider} from 'react-redux';
+import configureStore from "redux-mock-store";
+
+import mockStoreConf from "../../mocks/mock-store-conf.js";
+
+const mockStore = configureStore([]);
 
 const mockOffer = {
   caption: `Down by the Way, in Minsk`,
@@ -9,12 +15,16 @@ const mockOffer = {
 };
 
 it(`renders correctly`, () => {
+  const store = mockStore(mockStoreConf);
   const tree = renderer
-  .create(<OfferCard
-    offer={mockOffer}
-    onCardHover={jest.fn()}
-    handleActiveChange={jest.fn()}
-  />)
-  .toJSON();
+  .create(
+      <Provider store={store}>
+        <OfferCard
+          offer={mockOffer}
+          onCardHover={jest.fn()}
+          handleActiveChange={jest.fn()}
+        />
+      </Provider>
+  );
   expect(tree).toMatchSnapshot();
 });

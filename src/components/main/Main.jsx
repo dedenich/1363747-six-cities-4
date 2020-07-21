@@ -1,12 +1,16 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
+import {Link} from 'react-router-dom';
+
 import OffersList from "../offers-list/offers-list.jsx";
 import Map from "../map/map.jsx";
 import CitiesList from "../cities-list/cities-list.jsx";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 
 import {getCurrentCity, getOffers} from "../../reducers/offers/selectors.js";
+
+import {AppRoute} from "../../const.js";
 
 const CitiesListWrapped = withActiveItem(CitiesList);
 const OffersListWrapped = withActiveItem(OffersList);
@@ -33,11 +37,11 @@ class Main extends PureComponent {
               <nav className="header__nav">
                 <ul className="header__nav-list">
                   <li className="header__nav-item user">
-                    <a className="header__nav-link header__nav-link--profile" href="#">
+                    <Link className="header__nav-link header__nav-link--profile" to={AppRoute.SING_IN}>
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
                       <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </nav>

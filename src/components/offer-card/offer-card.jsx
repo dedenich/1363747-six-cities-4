@@ -1,13 +1,20 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import history from '../../history.js';
 
-export default class OfferCard extends PureComponent {
+import {AuthorizationStatus, AppRoute} from "../../const.js";
+
+import {Operation as OffersOperation} from '../../reducers/offers/offers.js';
+
+class OfferCard extends PureComponent {
   constructor(props) {
     super(props);
   }
 
   render() {
-    const {offer, handleActiveChange, onHeadingClick} = this.props;
+    const {offer, handleActiveChange, onHeadingClick, authorizationStatus, onAddToFavorite,
+      onRemoveFromFavorite} = this.props;
     const {caption, src, price} = offer;
     return (
       <article className="cities__place-card place-card" onMouseEnter={handleActiveChange}>
@@ -25,9 +32,23 @@ export default class OfferCard extends PureComponent {
               <b className="place-card__price-value">&euro;{price}</b>
               <span className="place-card__price-text">&#47;&nbsp;night</span>
             </div>
-            <button className="place-card__bookmark-button button" type="button">
+            <button
+              className="place-card__bookmark-button button" type="button"
+              onClick={() => {
+                if (authorizationStatus !== AuthorizationStatus.AUTH) {
+                  history.push(AppRoute.SING_IN);
+                  return;
+                }
+
+                if (offer.isFavorite) {
+                  onRemoveFromFavorite(offer.id);
+                } else {
+                  onAddToFavorite(offer.id);
+                }
+              }}
+            >
               <svg className="place-card__bookmark-icon" width="18" height="19">
-                <use xlinkHref="#icon-bookmark"></use>
+                <use xlinkHref="#icon-bookmark" />
               </svg>
               <span className="visually-hidden">To bookmarks</span>
             </button>
@@ -53,7 +74,24 @@ OfferCard.propTypes = {
     caption: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool,
+    id: PropTypes.number,
   }).isRequired,
   handleActiveChange: PropTypes.func.isRequired,
   onHeadingClick: PropTypes.func,
+  onAddToFavorite: PropTypes.func,
+  onRemoveFromFavorite: PropTypes.func,
+  authorizationStatus: PropTypes.string,
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  onAddToFavorite(id) {
+    dispatch(OffersOperation.addToFavorites(id));
+  },
+  onRemoveFromFavorite(id) {
+    dispatch(OffersOperation.removeFromFavorites(id));
+  },
+});
+
+export {OfferCard};
+export default connect(null, mapDispatchToProps)(OfferCard);

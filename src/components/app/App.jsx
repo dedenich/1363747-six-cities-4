@@ -1,9 +1,11 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {Router, Route, Switch, Redirect} from 'react-router-dom';
 import {connect} from "react-redux";
 
-import PropertyScreen from "../property-screen/property-screen.jsx";
+import history from "../../history.js";
+import {AppRoute, AuthorizationStatus} from "../../const.js";
+
 import Main from "../main/Main.jsx";
 
 import {Operation as OfferOperation} from "../../reducers/offers/offers.js";
@@ -30,33 +32,24 @@ class App extends PureComponent {
     onLoadOffers();
   }
 
-  _renderApp() {
-    const {
-      currentOffer,
-    } = this.props;
-    if (currentOffer !== null) {
-      return (
-        <PropertyScreen/>
-      );
-    } else {
-      return (
-        <Main/>
-      );
-    }
-  }
-
   render() {
+    const {authorizationStatus} = this.props;
+
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <Switch>
-          <Route exact path="/">
-            {this._renderApp()}
-          </Route>
-          <Route exact path="/offer">
-            <PropertyScreen/>
-          </Route>
+          <Route exact path={AppRoute.ROOT} render={() => <Main/>}/>
+          <Route exact path={AppRoute.SING_IN} render={() => {
+            if (authorizationStatus === AuthorizationStatus.AUTH) {
+              return null;
+            }
+            return <Redirect to={AppRoute.ROOT} />;
+          }}/>
+          <Route exact path={AppRoute.FAVORITES}/>
+          <Route exact path={AppRoute.ROOM}/>
+
         </Switch>
-      </BrowserRouter>
+      </Router>
     );
   }
 }
@@ -64,6 +57,7 @@ class App extends PureComponent {
 App.propTypes = {
   currentOffer: PropTypes.string,
   onLoadOffers: PropTypes.func,
+  authorizationStatus: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
