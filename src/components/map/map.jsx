@@ -2,6 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import configireMap, {updateMarkers} from "./map-config.js";
+import {getOffers} from "../../reducers/offers/selectors.js";
 
 export class Map extends PureComponent {
 
@@ -35,13 +36,13 @@ Map.propTypes = {
         src: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
         coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
-        city: PropTypes.string.isRequired,
+        cityName: PropTypes.string.isRequired,
       }).isRequired
   ).isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
+  offers: getOffers(state),
 });
 
 export default connect(mapStateToProps)(Map);

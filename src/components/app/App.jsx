@@ -2,8 +2,13 @@ import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {connect} from "react-redux";
+
 import PropertyScreen from "../property-screen/property-screen.jsx";
 import Main from "../main/Main.jsx";
+
+import {Operation as OfferOperation} from "../../reducers/offers/offers.js";
+
+import {getCurrentOffer} from "../../reducers/offers/selectors.js";
 
 class App extends PureComponent {
   constructor(props) {
@@ -20,11 +25,15 @@ class App extends PureComponent {
     return this.setState({currentOffer: item});
   }
 
+  componentDidMount() {
+    const {onLoadOffers} = this.props;
+    onLoadOffers();
+  }
+
   _renderApp() {
     const {
       currentOffer,
     } = this.props;
-
     if (currentOffer !== null) {
       return (
         <PropertyScreen/>
@@ -54,12 +63,18 @@ class App extends PureComponent {
 
 App.propTypes = {
   currentOffer: PropTypes.string,
+  onLoadOffers: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
-  currentOffer: state.currentOffer,
+  currentOffer: getCurrentOffer(state),
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  onLoadOffers() {
+    dispatch(OfferOperation.loadOffers());
+  },
+});
 
 export {App};
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

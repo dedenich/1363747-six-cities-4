@@ -1,7 +1,9 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator} from "../../reducers/offers/offers.js";
+
+import {getCities} from "../../reducers/offers/selectors.js";
 
 class CitiesList extends PureComponent {
 
@@ -43,14 +45,14 @@ CitiesList.propTypes = {
 
 const mapStateToProps = (state) => ({
   onCityClick: state.onCityClick,
-  cities: state.cities,
+  cities: getCities(state),
 });
 
 
 const mapDispatchToProps = (dispatch) => ({
   onCityClick(e) {
     dispatch(ActionCreator.changeCity(e.target.textContent));
-    dispatch(ActionCreator.getOffers(e.target.textContent));
+    dispatch(ActionCreator.getOffersIn(e.target.textContent));
   },
 });
 

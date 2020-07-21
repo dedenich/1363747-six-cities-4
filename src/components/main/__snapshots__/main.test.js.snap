@@ -76,7 +76,36 @@ exports[`renders correctly 1`] = `
           <ul
             className="locations__list tabs__list"
           >
-            
+            <li
+              className="locations__item"
+              onClick={[Function]}
+            >
+              <a
+                className="locations__item-link tabs__item "
+                href="#"
+              >
+                <span
+                  onClick={[Function]}
+                >
+                  1
+                </span>
+              </a>
+            </li>
+            <li
+              className="locations__item"
+              onClick={[Function]}
+            >
+              <a
+                className="locations__item-link tabs__item "
+                href="#"
+              >
+                <span
+                  onClick={[Function]}
+                >
+                  2
+                </span>
+              </a>
+            </li>
           </ul>
         </section>
       </section>
@@ -98,9 +127,8 @@ exports[`renders correctly 1`] = `
           <b
             className="places__found"
           >
-            3
+            4
              places to stay in 
-            Moskow
           </b>
           <form
             action="#"
@@ -180,7 +208,7 @@ exports[`renders correctly 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="https://path"
+                    src="https://dummyimage.com/260x200/000/fff"
                     width="260"
                   />
                 </a>
@@ -252,7 +280,7 @@ exports[`renders correctly 1`] = `
                   <a
                     href="#"
                   >
-                    Capion 1
+                    Beautiful & luxurious studio at great location
                   </a>
                 </h2>
                 <p
@@ -283,7 +311,7 @@ exports[`renders correctly 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="https://path"
+                    src="https://dummyimage.com/260x200/000/fff"
                     width="260"
                   />
                 </a>
@@ -301,7 +329,7 @@ exports[`renders correctly 1`] = `
                       className="place-card__price-value"
                     >
                       €
-                      160
+                      200
                     </b>
                     <span
                       className="place-card__price-text"
@@ -355,7 +383,7 @@ exports[`renders correctly 1`] = `
                   <a
                     href="#"
                   >
-                    Capion 2
+                    Studio at great location
                   </a>
                 </h2>
                 <p
@@ -386,7 +414,7 @@ exports[`renders correctly 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="https://path"
+                    src="https://dummyimage.com/260x200/000/fff"
                     width="260"
                   />
                 </a>
@@ -404,7 +432,7 @@ exports[`renders correctly 1`] = `
                       className="place-card__price-value"
                     >
                       €
-                      90
+                      300
                     </b>
                     <span
                       className="place-card__price-text"
@@ -458,7 +486,110 @@ exports[`renders correctly 1`] = `
                   <a
                     href="#"
                   >
-                    Capion 3
+                    Studio at great location
+                  </a>
+                </h2>
+                <p
+                  className="place-card__type"
+                >
+                  Apartment
+                </p>
+              </div>
+            </article>
+            <article
+              className="cities__place-card place-card"
+              onMouseEnter={[Function]}
+            >
+              <div
+                className="place-card__mark"
+              >
+                <span>
+                  Premium
+                </span>
+              </div>
+              <div
+                className="cities__image-wrapper place-card__image-wrapper"
+              >
+                <a
+                  href="#"
+                >
+                  <img
+                    alt="Place image"
+                    className="place-card__image"
+                    height="200"
+                    src="https://dummyimage.com/260x200/000/fff"
+                    width="260"
+                  />
+                </a>
+              </div>
+              <div
+                className="place-card__info"
+              >
+                <div
+                  className="place-card__price-wrapper"
+                >
+                  <div
+                    className="place-card__price"
+                  >
+                    <b
+                      className="place-card__price-value"
+                    >
+                      €
+                      100
+                    </b>
+                    <span
+                      className="place-card__price-text"
+                    >
+                      / night
+                    </span>
+                  </div>
+                  <button
+                    className="place-card__bookmark-button button"
+                    type="button"
+                  >
+                    <svg
+                      className="place-card__bookmark-icon"
+                      height="19"
+                      width="18"
+                    >
+                      <use
+                        xlinkHref="#icon-bookmark"
+                      />
+                    </svg>
+                    <span
+                      className="visually-hidden"
+                    >
+                      To bookmarks
+                    </span>
+                  </button>
+                </div>
+                <div
+                  className="place-card__rating rating"
+                >
+                  <div
+                    className="place-card__stars rating__stars"
+                  >
+                    <span
+                      style={
+                        Object {
+                          "width": "80%",
+                        }
+                      }
+                    />
+                    <span
+                      className="visually-hidden"
+                    >
+                      Rating
+                    </span>
+                  </div>
+                </div>
+                <h2
+                  className="place-card__name"
+                >
+                  <a
+                    href="#"
+                  >
+                    Big Studio at great location
                   </a>
                 </h2>
                 <p
