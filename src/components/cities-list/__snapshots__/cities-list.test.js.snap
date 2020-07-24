@@ -13,7 +13,7 @@ exports[`renders correctly 1`] = `
     >
       <a
         className="locations__item-link tabs__item "
-        href="#"
+        href=""
       >
         <span>
           1
@@ -26,7 +26,7 @@ exports[`renders correctly 1`] = `
     >
       <a
         className="locations__item-link tabs__item "
-        href="#"
+        href=""
       >
         <span>
           2

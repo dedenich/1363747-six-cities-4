@@ -8,6 +8,8 @@ import mockOffersList from "../../mocks/offers.js";
 
 import NameSpace from '../../reducers/namespace.js';
 import {AuthorizationStatus} from "../../const.js";
+import {Router} from 'react-router-dom';
+import history from "../../history.js";
 
 const mockStore = configureStore([]);
 
@@ -29,9 +31,12 @@ it(`should detect when header is pressed`, () => {
   });
   const main = mount(
       <Provider store={store}>
-        <Main
-          handleClick={onHeaderClick}
-        />
+        <Router history={history}>
+          <Main
+            handleClick={onHeaderClick}
+          />
+        </Router>
+
       </Provider>
   );
   const header = main.find(`.places__found`);

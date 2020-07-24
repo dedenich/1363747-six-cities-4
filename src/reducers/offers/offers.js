@@ -1,4 +1,4 @@
-import {extend, getOffersIn} from '../../utils.js';
+import {extend, getOffersIn, updateOffer, removeFromFavorites} from '../../utils.js';
 import convertOffer from '../../adapters/offer.js';
 
 const ActionType = {
@@ -7,6 +7,9 @@ const ActionType = {
   GET_OFFERS_IN: `GET_OFFERS_IN`,
   GET_CITIES: `GET_CITIES`,
   LOAD_OFFERS: `LOAD_OFFERS`,
+  UPDATE_OFFER: `UPDATE_OFFER`,
+  REMOVE_FROM_FAVORITES: `REMOVE_FROM_FAVORITES`,
+
 };
 
 const initialState = {
@@ -36,6 +39,16 @@ const ActionCreator = {
     type: ActionType.LOAD_OFFERS,
     payload: loadedOffers,
   }),
+
+  updateOffer: (editedOffer) => ({
+    type: ActionType.UPDATE_OFFER,
+    payload: editedOffer,
+  }),
+
+  removeFromFavorites: (id) => ({
+    type: ActionType.REMOVE_FROM_FAVORITES,
+    payload: id,
+  }),
 };
 
 const Operation = {
@@ -46,6 +59,31 @@ const Operation = {
       const convertedOffers = response.data.map(convertOffer);
       dispatch(ActionCreator.loadOffers(convertedOffers));
       dispatch(ActionCreator.getCities());
+    })
+    .catch((error) => {
+      throw error;
+    });
+  },
+
+  addToFavorites: (offerId) => (dispatch, getState, api) => {
+    return api.post(`/favorite/${offerId}/1`)
+    .then((response) => {
+      const editedOffer = convertOffer(response.data);
+
+      dispatch(ActionCreator.updateOffer(editedOffer));
+    })
+    .catch((error) => {
+      throw error;
+    });
+  },
+
+  removeFromFavorites: (offerId) => (dispatch, getState, api) => {
+    return api.post(`/favorite/${offerId}/0`)
+    .then((response) => {
+      const editedOffer = convertOffer(response.data);
+
+      dispatch(ActionCreator.updateOffer(editedOffer));
+      dispatch(ActionCreator.removeFromFavorites(offerId));
     })
     .catch((error) => {
       throw error;
@@ -71,6 +109,14 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_OFFERS:
       return extend(state, {
         offers: action.payload,
+      });
+    case ActionType.UPDATE_OFFER:
+      return extend(state, {
+        offers: updateOffer(state.offers, action.payload),
+      });
+    case ActionType.REMOVE_FROM_FAVORITES:
+      return extend(state, {
+        favoritesOffers: removeFromFavorites(state.favoritesOffers, action.payload),
       });
   }
   return state;

@@ -18,7 +18,7 @@ class CitiesList extends PureComponent {
         <ul className="locations__list tabs__list">
           {!cities ? `` : [...cities].map((it, i) => (
             <li className="locations__item" key={it + i} onClick={onCityClick}>
-              <a className={`locations__item-link tabs__item ${it === activeItem ? `tabs__item--active` : ``}`} href="#">
+              <a className={`locations__item-link tabs__item ${it === activeItem ? `tabs__item--active` : ``}`} href="">
                 <span onClick={handleActiveChange}>{it}</span>
               </a>
             </li>

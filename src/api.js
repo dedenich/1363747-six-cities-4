@@ -1,4 +1,6 @@
 import axios from "axios";
+import history from "./history.js";
+import {AppRoute} from "./const.js";
 
 const ApiConfig = {
   baseURL: `https://4.react.pages.academy/six-cities`,
@@ -10,7 +12,11 @@ const ErrorsTypes = {
   UNAUTHORIZED: 401,
 };
 
-const createAPI = (onUnauthorized) => {
+const onUnauthorized = () => {
+  history.push(AppRoute.SING_IN);
+};
+
+const createAPI = () => {
   const api = axios.create(ApiConfig);
 
   const onSuccess = (response) => response;

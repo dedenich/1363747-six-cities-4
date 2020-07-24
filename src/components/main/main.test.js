@@ -6,6 +6,8 @@ import configureStore from "redux-mock-store";
 import mockOffersList from "../../mocks/offers.js";
 import NameSpace from '../../reducers/namespace.js';
 import {AuthorizationStatus} from "../../const.js";
+import {Router} from 'react-router-dom';
+import history from "../../history.js";
 
 const mockStore = configureStore([]);
 
@@ -22,7 +24,10 @@ it(`renders correctly`, () => {
   });
   const tree = renderer.create(
       <Provider store={store}>
-        <Main/>
+        <Router history={history}>
+          <Main/>
+        </Router>
+
       </Provider>)
   .toJSON();
   expect(tree).toMatchSnapshot();

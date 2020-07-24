@@ -1,10 +1,14 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {Router, Route, Switch} from 'react-router-dom';
 import {connect} from "react-redux";
 
-import PropertyScreen from "../property-screen/property-screen.jsx";
+import history from "../../history.js";
+import {AppRoute} from "../../const.js";
+
 import Main from "../main/Main.jsx";
+import PropertyScreen from "../property-screen/property-screen.jsx";
+import LoginScreen from "../login-screen/login-screen.jsx";
 
 import {Operation as OfferOperation} from "../../reducers/offers/offers.js";
 
@@ -30,33 +34,18 @@ class App extends PureComponent {
     onLoadOffers();
   }
 
-  _renderApp() {
-    const {
-      currentOffer,
-    } = this.props;
-    if (currentOffer !== null) {
-      return (
-        <PropertyScreen/>
-      );
-    } else {
-      return (
-        <Main/>
-      );
-    }
-  }
-
   render() {
+
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <Switch>
-          <Route exact path="/">
-            {this._renderApp()}
-          </Route>
-          <Route exact path="/offer">
-            <PropertyScreen/>
-          </Route>
+          <Route path={AppRoute.ROOT} component={Main} exact />
+          <Route path={AppRoute.SING_IN} component={LoginScreen} exact />
+          <Route path={AppRoute.FAVORITES} exact />
+          <Route path={AppRoute.ROOM} exact component={PropertyScreen}/>
+
         </Switch>
-      </BrowserRouter>
+      </Router>
     );
   }
 }
@@ -64,6 +53,7 @@ class App extends PureComponent {
 App.propTypes = {
   currentOffer: PropTypes.string,
   onLoadOffers: PropTypes.func,
+  authorizationStatus: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
