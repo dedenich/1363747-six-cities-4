@@ -24,6 +24,32 @@ const mockOffersList = [
   },
 ];
 
+
+const mockReviews = [
+  {
+    comment: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
+    date: `2019-05-08T14:13:56.569Z`,
+    rating: 4,
+    user: {
+      avatarUrl: `img/1.png`,
+      id: 4,
+      isPro: false,
+      name: `Max`
+    }
+  },
+  {
+    comment: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
+    date: `2019-05-08T14:13:56.569Z`,
+    rating: 4,
+    user: {
+      avatarUrl: `img/1.png`,
+      id: 4,
+      isPro: false,
+      name: `Max`
+    }
+  }
+];
+
 export default {
   [NameSpace.USER]: {
     authorizationStatus: AuthorizationStatus.NO_AUTH,
@@ -32,5 +58,6 @@ export default {
     offers: mockOffersList,
     cities: new Set([`1`, `2`]),
     currentCity: `Brussels`,
+    rewiews: mockReviews,
   },
 };

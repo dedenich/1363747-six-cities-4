@@ -1,8 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
-import {connect} from "react-redux";
 import configireMap, {updateMarkers} from "./map-config.js";
-import {getOffers} from "../../reducers/offers/selectors.js";
 
 export class Map extends PureComponent {
 
@@ -12,7 +10,7 @@ export class Map extends PureComponent {
 
   render() {
     return (
-      <section className="cities__map map" id="map"></section>
+      <div id="map" style={{height: `100%`}}></div>
     );
   }
 
@@ -41,8 +39,4 @@ Map.propTypes = {
   ).isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  offers: getOffers(state),
-});
-
-export default connect(mapStateToProps)(Map);
+export default Map;

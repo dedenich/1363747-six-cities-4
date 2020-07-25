@@ -42,6 +42,7 @@ class App extends PureComponent {
           <Route path={AppRoute.ROOT} component={Main} exact />
           <Route path={AppRoute.SING_IN} component={LoginScreen} exact />
           <Route path={AppRoute.FAVORITES} exact />
+          <Route path="/offer" exact component={PropertyScreen}/>
           <Route path={AppRoute.ROOM} exact component={PropertyScreen}/>
 
         </Switch>
