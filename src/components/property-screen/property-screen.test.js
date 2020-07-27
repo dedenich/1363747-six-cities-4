@@ -3,8 +3,11 @@ import renderer from 'react-test-renderer';
 import PropertyScreen from './property-screen.jsx';
 import {Provider} from 'react-redux';
 import configureStore from "redux-mock-store";
+import thunk from 'redux-thunk';
+import axios from 'axios';
 
-const mockStore = configureStore([]);
+const middlewares = [thunk];
+const mockStore = configureStore(middlewares);
 
 const mockProperties = {
   photos: [
@@ -35,17 +38,25 @@ const mockProperties = {
   },
 };
 
-it(`renders correctly`, () => {
-  const store = mockStore({
-    properties: mockProperties,
-  });
+jest.mock(`axios`, () => {
+  return {
+    get: jest.fn()};
+});
 
-  const tree = renderer
-  .create(
-      <Provider store={store}>
-        <PropertyScreen/>
-      </Provider>
-  )
-  .toJSON();
-  expect(tree).toMatchSnapshot();
+it(`renders correctly`, () => {
+  if (!(axios.get).mockImplementationOnce(() => Promise.resolve())) {
+    const store = mockStore({
+      OFFERS: {
+        properties: mockProperties,
+        reviews: [],
+      }});
+    const tree = renderer
+    .create(
+        <Provider store={store}>
+          <PropertyScreen/>
+        </Provider>
+    )
+    .toJSON();
+    expect(tree).toMatchSnapshot();
+  }
 });
