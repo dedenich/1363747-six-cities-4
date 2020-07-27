@@ -76,7 +76,7 @@ class Main extends PureComponent {
                     <li className="places__option" tabIndex="0">Top rated first</li>
                   </ul>
                 </form>
-                {offers ? <OffersListWrapped offers={offers}/> : ``}
+                {offers && <OffersListWrapped offers={offers}/>}
               </section>
               <div className="cities__right-section">
                 <section className="cities__map map" id="map">

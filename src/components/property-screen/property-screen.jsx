@@ -2,7 +2,6 @@ import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import pt from "./property-screen-pt.jsx";
 import ReviewList from "../review-list/review-list.jsx";
-import mockProps from "../../mocks/properties.js";
 
 import Map from "../map/map.jsx";
 import OffersList from "../offers-list/offers-list.jsx";
@@ -22,13 +21,7 @@ class PropertyScreen extends PureComponent {
 
   render() {
     const {offersNearby} = this.props;
-    let propers;
-    if (this.props.offer !== undefined) {
-      propers = this.props.offer;
-    } else {
-      propers = mockProps;
-    }
-    const {photos, heading, describtion, premium, type, rating, bedroomsNumber, maxGuests, price, list, host} = propers;
+    const {photos, heading, describtion, premium, type, rating, bedroomsNumber, maxGuests, price, list, host} = this.props.offer;
     return (
       <div className="page">
         <header className="header">
@@ -177,13 +170,13 @@ class PropertyScreen extends PureComponent {
               </div>
             </div>
             <section className="property__map map">
-              {offersNearby ? <Map offers={offersNearby}/> : ``}
+              {offersNearby && <Map offers={offersNearby}/>}
             </section>
           </section>
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
-              {offersNearby ? <OffersList offers={offersNearby}/> : ``}
+              {offersNearby && <OffersList offers={offersNearby}/>}
             </section>
           </div>
         </main>
