@@ -59,5 +59,6 @@ export default {
     cities: new Set([`1`, `2`]),
     currentCity: `Brussels`,
     rewiews: mockReviews,
+    sortingType: `Popular`,
   },
 };

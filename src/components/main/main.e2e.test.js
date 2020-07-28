@@ -27,6 +27,7 @@ it(`should detect when header is pressed`, () => {
       offers: mockOffersList,
       cities: new Set([`1`, `2`]),
       currentCity: `Brussels`,
+      sortingType: `Popular`,
     },
   });
   const main = mount(

@@ -14,8 +14,10 @@ it(`renders correctly`, () => {
   const store = mockStore({
     OFFERS: {city: `Moskow`,
       currentOffer: `1`,
-      offers: mockOffersList,
+      currentCity: `Amsterdam`,
+      offers: [],
       allOffers: mockOffersList,
+      sortingType: `Popular`,
       properties}
   });
   const tree = renderer
