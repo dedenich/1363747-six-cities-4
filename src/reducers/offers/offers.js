@@ -14,6 +14,7 @@ const ActionType = {
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   LOAD_OFFERS_NEARBY: `LOAD_OFFERS_NEARBY`,
   CHANGE_SORTING: `CHANGE_SORTING`,
+  CHANGE_ACTIVE_OFFER: `CHANGE_ACTIVE_OFFER`,
 };
 
 const initialState = {
@@ -69,6 +70,11 @@ const ActionCreator = {
     type: ActionType.CHANGE_SORTING,
     payload: sortingType,
   }),
+
+  changeActiveOffer: (id) => ({
+    type: ActionType.CHANGE_ACTIVE_OFFER,
+    payload: id,
+  })
 };
 
 const Operation = {
@@ -176,6 +182,11 @@ const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_SORTING:
       return extend(state, {
         sortingType: action.payload,
+      });
+
+    case ActionType.CHANGE_ACTIVE_OFFER:
+      return extend(state, {
+        currentOffer: action.payload,
       });
   }
   return state;

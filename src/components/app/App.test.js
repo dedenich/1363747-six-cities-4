@@ -13,7 +13,7 @@ const mockFn = jest.fn();
 it(`renders correctly`, () => {
   const store = mockStore({
     OFFERS: {city: `Moskow`,
-      currentOffer: `1`,
+      currentOffer: 1,
       currentCity: `Amsterdam`,
       offers: [],
       allOffers: mockOffersList,
