@@ -1,6 +1,7 @@
 import {extend, getOffersIn, updateOffer, removeFromFavorites} from '../../utils.js';
 import convertOffer from '../../adapters/offer.js';
 import convertReview from '../../adapters/review.js';
+import {SortingTypes} from '../../const.js';
 
 const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
@@ -12,13 +13,15 @@ const ActionType = {
   REMOVE_FROM_FAVORITES: `REMOVE_FROM_FAVORITES`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   LOAD_OFFERS_NEARBY: `LOAD_OFFERS_NEARBY`,
+  CHANGE_SORTING: `CHANGE_SORTING`,
 };
 
 const initialState = {
-  city: null,
+  city: `Amsterdam`,
   currentOffer: null,
   offers: [],
   properties: [],
+  sortingType: SortingTypes.POPULAR,
 };
 
 const ActionCreator = {
@@ -60,6 +63,11 @@ const ActionCreator = {
   loadOffersNearby: (loadedOffers) => ({
     type: ActionType.LOAD_OFFERS_NEARBY,
     payload: loadedOffers,
+  }),
+
+  changeSorting: (sortingType) => ({
+    type: ActionType.CHANGE_SORTING,
+    payload: sortingType,
   }),
 };
 
@@ -159,9 +167,15 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         offers: updateOffer(state.offers, action.payload),
       });
+
     case ActionType.REMOVE_FROM_FAVORITES:
       return extend(state, {
         favoritesOffers: removeFromFavorites(state.favoritesOffers, action.payload),
+      });
+
+    case ActionType.CHANGE_SORTING:
+      return extend(state, {
+        sortingType: action.payload,
       });
   }
   return state;

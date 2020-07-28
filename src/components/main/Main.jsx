@@ -6,14 +6,18 @@ import {Link} from 'react-router-dom';
 import OffersList from "../offers-list/offers-list.jsx";
 import Map from "../map/map.jsx";
 import CitiesList from "../cities-list/cities-list.jsx";
-import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
+import Sorting from "../sorting/sorting.jsx";
 
-import {getCurrentCity, getOffers} from "../../reducers/offers/selectors.js";
+import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
+import withInitialState from "../../hocs/with-initial-state/with-initial-state.jsx";
+
+import {getCurrentCity, getOffers, getCurrentCityOffers} from "../../reducers/offers/selectors.js";
 
 import {AppRoute} from "../../const.js";
 
 const CitiesListWrapped = withActiveItem(CitiesList);
 const OffersListWrapped = withActiveItem(OffersList);
+const SortingWrapped = withInitialState(Sorting);
 
 class Main extends PureComponent {
 
@@ -22,7 +26,7 @@ class Main extends PureComponent {
   }
 
   render() {
-    const {offers, handleClick, city} = this.props;
+    const {offers, handleClick, city, currentCityOffers} = this.props;
     const offersCount = offers.length;
     return (
       <div className="page page--gray page--main">
@@ -61,7 +65,8 @@ class Main extends PureComponent {
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found" onClick={handleClick}>{offersCount} places to stay in {city}</b>
-                <form className="places__sorting" action="#" method="get">
+                <SortingWrapped/>
+                {/* <form className="places__sorting" action="#" method="get">
                   <span className="places__sorting-caption">Sort by</span>
                   <span className="places__sorting-type" tabIndex="0">
                     Popular
@@ -75,8 +80,8 @@ class Main extends PureComponent {
                     <li className="places__option" tabIndex="0">Price: high to low</li>
                     <li className="places__option" tabIndex="0">Top rated first</li>
                   </ul>
-                </form>
-                {offers && <OffersListWrapped offers={offers}/>}
+                </form> */}
+                {offers && <OffersListWrapped offers={currentCityOffers}/>}
               </section>
               <div className="cities__right-section">
                 <section className="cities__map map" id="map">
@@ -102,11 +107,21 @@ Main.propTypes = {
         cityName: PropTypes.string.isRequired,
       }).isRequired
   ).isRequired,
+  currentCityOffers: PropTypes.arrayOf(
+      PropTypes.shape({
+        caption: PropTypes.string.isRequired,
+        src: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
+        cityName: PropTypes.string.isRequired,
+      }).isRequired
+  ).isRequired,
   handleClick: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
   offers: getOffers(state),
+  currentCityOffers: getCurrentCityOffers(state),
   city: getCurrentCity(state),
   onHeadingClick: state.onHeadingClick,
 });
