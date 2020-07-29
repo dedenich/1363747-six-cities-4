@@ -10,14 +10,15 @@ import {Operation as OffersOperation, ActionCreator} from '../../reducers/offers
 class OfferCard extends PureComponent {
   constructor(props) {
     super(props);
-    this.id = props.offer.id;
+    this.state = {
+      id: props.offer.id
+    };
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(e) {
-    const {handleActiveChange, handleOfferChange} = this.props;
-    handleOfferChange(this.id);
-    handleActiveChange(e);
+  handleChange() {
+    const {handleOfferChange} = this.props;
+    handleOfferChange(this.state.id);
   }
 
   render() {
@@ -85,7 +86,6 @@ OfferCard.propTypes = {
     isFavorite: PropTypes.bool,
     id: PropTypes.number,
   }).isRequired,
-  handleActiveChange: PropTypes.func.isRequired,
   handleOfferChange: PropTypes.func.isRequired,
   onHeadingClick: PropTypes.func,
   onAddToFavorite: PropTypes.func,

@@ -52,7 +52,7 @@ export const updateMarkers = (offers, activeOfferID = null) => {
   places = offers.map((it) => (it.coordinates));
   offers.forEach((el) => {
     let lMarker = leaflet
-      .marker(el.coordinates, el.id === activeOfferID ? {icon: activeIcon} : {icon})
+      .marker(el.coordinates, {icon: el.id === activeOfferID ? activeIcon : icon})
       .addTo(map);
     _markers.push(lMarker);
   });
