@@ -51,7 +51,7 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  currentOffer: PropTypes.string,
+  currentOffer: PropTypes.number,
   onLoadOffers: PropTypes.func,
   authorizationStatus: PropTypes.string,
 };

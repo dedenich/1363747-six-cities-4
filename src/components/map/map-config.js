@@ -1,14 +1,24 @@
 import leaflet from 'leaflet';
 
-let map; let icon; let _markers = [];
+let map; let _markers = [];
 
-const configureMap = (places) => {
+let places;
+
+const activeIcon = leaflet.icon({
+  iconUrl: `img/pin-active.svg`,
+  iconSize: [30, 30]
+});
+
+const icon = leaflet.icon({
+  iconUrl: `img/pin.svg`,
+  iconSize: [30, 30]
+});
+
+const configureMap = (offers) => {
+
+  places = offers.map((it) => (it.coordinates));
 
   const city = [52.38333, 4.9];
-  icon = leaflet.icon({
-    iconUrl: `img/pin.svg`,
-    iconSize: [30, 30]
-  });
   const zoom = 12;
 
   if (document.getElementById(`map`)) {
@@ -35,14 +45,14 @@ const configureMap = (places) => {
   }
 };
 
-export const updateMarkers = (places) => {
+export const updateMarkers = (offers, activeOfferID = null) => {
   _markers.forEach((el) => {
     el.removeFrom(map);
   });
-
-  places.forEach((el) => {
+  places = offers.map((it) => (it.coordinates));
+  offers.forEach((el) => {
     let lMarker = leaflet
-      .marker(el, {icon})
+      .marker(el.coordinates, {icon: el.id === activeOfferID ? activeIcon : icon})
       .addTo(map);
     _markers.push(lMarker);
   });

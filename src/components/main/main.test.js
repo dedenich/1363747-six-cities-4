@@ -20,6 +20,7 @@ it(`renders correctly`, () => {
       offers: mockOffersList,
       cities: new Set([`1`, `2`]),
       currentCity: `Brussels`,
+      sortingType: `Popular`,
     },
   });
   const tree = renderer.create(

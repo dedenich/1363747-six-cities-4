@@ -5,19 +5,28 @@ import history from '../../history.js';
 
 import {AuthorizationStatus, AppRoute} from "../../const.js";
 
-import {Operation as OffersOperation} from '../../reducers/offers/offers.js';
+import {Operation as OffersOperation, ActionCreator} from '../../reducers/offers/offers.js';
 
 class OfferCard extends PureComponent {
   constructor(props) {
     super(props);
+    this.state = {
+      id: props.offer.id
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange() {
+    const {handleOfferChange} = this.props;
+    handleOfferChange(this.state.id);
   }
 
   render() {
-    const {offer, handleActiveChange, onHeadingClick, authorizationStatus, onAddToFavorite,
+    const {offer, onHeadingClick, authorizationStatus, onAddToFavorite,
       onRemoveFromFavorite} = this.props;
     const {caption, src, price} = offer;
     return (
-      <article className="cities__place-card place-card" onMouseEnter={handleActiveChange}>
+      <article className="cities__place-card place-card" onMouseEnter={this.handleChange}>
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
@@ -77,7 +86,7 @@ OfferCard.propTypes = {
     isFavorite: PropTypes.bool,
     id: PropTypes.number,
   }).isRequired,
-  handleActiveChange: PropTypes.func.isRequired,
+  handleOfferChange: PropTypes.func.isRequired,
   onHeadingClick: PropTypes.func,
   onAddToFavorite: PropTypes.func,
   onRemoveFromFavorite: PropTypes.func,
@@ -85,6 +94,9 @@ OfferCard.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  handleOfferChange(id) {
+    dispatch(ActionCreator.changeActiveOffer(id));
+  },
   onAddToFavorite(id) {
     dispatch(OffersOperation.addToFavorites(id));
   },

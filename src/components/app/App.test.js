@@ -13,9 +13,11 @@ const mockFn = jest.fn();
 it(`renders correctly`, () => {
   const store = mockStore({
     OFFERS: {city: `Moskow`,
-      currentOffer: `1`,
-      offers: mockOffersList,
+      currentOffer: 1,
+      currentCity: `Amsterdam`,
+      offers: [],
       allOffers: mockOffersList,
+      sortingType: `Popular`,
       properties}
   });
   const tree = renderer

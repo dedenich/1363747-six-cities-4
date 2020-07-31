@@ -1,8 +1,10 @@
-export const extend = (a, b) => {
+import {SortingTypes} from './const.js';
+
+const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 
-export const updateOffer = (offers, editedOffer) => {
+const updateOffer = (offers, editedOffer) => {
 
   return offers.map((offer) => {
     if (offer.id === editedOffer.id) {
@@ -12,9 +14,9 @@ export const updateOffer = (offers, editedOffer) => {
   });
 };
 
-export const getOffersIn = (city, offers) => (offers.filter((it) => it.city.name === city));
+const getOffersIn = (city, offers) => (offers.filter((it) => it.city.name === city));
 
-export const removeFromFavorites = (favoriteOffers, offerId) => {
+const removeFromFavorites = (favoriteOffers, offerId) => {
   return favoriteOffers.reduce((acc, item) => {
     const newOffers = item.offers.filter((offer) => offer.id !== offerId);
 
@@ -26,4 +28,29 @@ export const removeFromFavorites = (favoriteOffers, offerId) => {
     }
     return acc;
   }, []);
+};
+
+const sortOffers = (offers, sortingType) => {
+  const offersCopy = offers.slice();
+
+  switch (sortingType) {
+    case SortingTypes.POPULAR:
+      return offersCopy;
+    case SortingTypes.PRICE_ASCENDING:
+      return offersCopy.sort((a, b) => a.price - b.price);
+    case SortingTypes.PRICE_DESCENDING:
+      return offersCopy.sort((a, b) => b.price - a.price);
+    case SortingTypes.RATING_DESCENDING:
+      return offersCopy.sort((a, b) => b.rating - a.rating);
+    default:
+      return offersCopy;
+  }
+};
+
+export {
+  extend,
+  updateOffer,
+  getOffersIn,
+  removeFromFavorites,
+  sortOffers
 };

@@ -1,8 +1,12 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+
 import configireMap, {updateMarkers} from "./map-config.js";
 
-export class Map extends PureComponent {
+import {getCurrentOffer} from "../../reducers/offers/selectors.js";
+
+class Map extends PureComponent {
 
   constructor(props) {
     super(props);
@@ -16,14 +20,12 @@ export class Map extends PureComponent {
 
   componentDidMount() {
     const {offers} = this.props;
-    const places = offers.map((it) => (it.coordinates));
-    configireMap(places);
+    configireMap(offers);
   }
 
   componentDidUpdate() {
-    const {offers} = this.props;
-    const places = offers.map((it) => (it.coordinates));
-    updateMarkers(places);
+    const {offers, activeOffer} = this.props;
+    updateMarkers(offers, activeOffer);
   }
 }
 
@@ -37,6 +39,14 @@ Map.propTypes = {
         cityName: PropTypes.string.isRequired,
       }).isRequired
   ).isRequired,
+  activeOffer: PropTypes.number,
 };
 
-export default Map;
+const mapStateToProps = (state) => ({
+  activeOffer: getCurrentOffer(state),
+});
+
+
+export {Map};
+export default connect(mapStateToProps)(Map);
+

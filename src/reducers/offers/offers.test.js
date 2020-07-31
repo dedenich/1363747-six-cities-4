@@ -2,10 +2,11 @@ import {reducer, ActionType, ActionCreator} from "./offers.js";
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
-    city: null,
+    city: `Amsterdam`,
     currentOffer: null,
     offers: [],
     properties: [],
+    sortingType: `Popular`,
   });
 });
 
