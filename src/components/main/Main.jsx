@@ -7,6 +7,7 @@ import OffersList from "../offers-list/offers-list.jsx";
 import Map from "../map/map.jsx";
 import CitiesList from "../cities-list/cities-list.jsx";
 import Sorting from "../sorting/sorting.jsx";
+import MainEmpty from "../main-empty/main-empty.jsx";
 
 import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 import withInitialState from "../../hocs/with-initial-state/with-initial-state.jsx";
@@ -53,7 +54,7 @@ class Main extends PureComponent {
           </div>
         </header>
 
-        <main className="page__main page__main--index">
+        <main className={`page__main page__main--index ${!offersCount ? `page__main--index-empty` : ``}`}>
           <h1 className="visually-hidden">Cities</h1>
           <div className="tabs">
             <section className="locations container">
@@ -61,17 +62,21 @@ class Main extends PureComponent {
             </section>
           </div>
           <div className="cities">
-            <div className="cities__places-container container">
-              <section className="cities__places places">
-                <h2 className="visually-hidden">Places</h2>
-                <b className="places__found" onClick={handleClick}>{offersCount} places to stay in {city}</b>
-                <SortingWrapped/>
-                {currentCityOffers && <OffersListWrapped offers={currentCityOffers}/>}
-              </section>
+            <div className={`cities__places-container container ${!offersCount ? `cities__places-container--empty` : ``}`}>
+              {!offersCount ?
+                <MainEmpty city={city}/>
+                :
+                <section className="cities__places places">
+                  <h2 className="visually-hidden">Places</h2>
+                  <b className="places__found" onClick={handleClick}>{offersCount} places to stay in {city}</b>
+                  <SortingWrapped/>
+                  {currentCityOffers && <OffersListWrapped offers={currentCityOffers}/>}
+                </section>}
               <div className="cities__right-section">
+                {offersCount &&
                 <section className="cities__map map" id="map">
                   <Map offers={offers}/>
-                </section>
+                </section>}
               </div>
             </div>
           </div>

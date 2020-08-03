@@ -33,3 +33,26 @@ it(`renders correctly`, () => {
   .toJSON();
   expect(tree).toMatchSnapshot();
 });
+
+it(`renders correctly when empty`, () => {
+  const store = mockStore({
+    [NameSpace.USER]: {
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
+    },
+    [NameSpace.OFFERS]: {
+      offers: [],
+      cities: new Set([`1`, `2`]),
+      currentCity: `Brussels`,
+      sortingType: `Popular`,
+      city: `Brussels`
+    },
+  });
+  const tree = renderer.create(
+      <Provider store={store}>
+        <Router history={history}>
+          <Main/>
+        </Router>
+      </Provider>)
+  .toJSON();
+  expect(tree).toMatchSnapshot();
+});
