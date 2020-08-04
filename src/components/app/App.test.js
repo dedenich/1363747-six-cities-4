@@ -18,13 +18,18 @@ it(`renders correctly`, () => {
       offers: [],
       allOffers: mockOffersList,
       sortingType: `Popular`,
-      properties}
+      properties},
+    USER: {
+      authorizationStatus: `NO_AUTH`,
+      authInfo: null,
+    }
   });
   const tree = renderer
   .create(
       <Provider store={store}>
         <App
           onLoadOffers={mockFn}
+          onCheckAuth={mockFn}
         />
       </Provider>
   )
