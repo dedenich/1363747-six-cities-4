@@ -13,8 +13,9 @@ import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 import withInitialState from "../../hocs/with-initial-state/with-initial-state.jsx";
 
 import {getCurrentCity, getOffers, getCurrentCityOffers} from "../../reducers/offers/selectors.js";
+import {getAuthorizationStatus, getAuthorizationInfo} from "../../reducers/user/selectors.js";
 
-import {AppRoute} from "../../const.js";
+import {AppRoute, AuthorizationStatus} from "../../const.js";
 
 const CitiesListWrapped = withActiveItem(CitiesList);
 const OffersListWrapped = withActiveItem(OffersList);
@@ -27,8 +28,9 @@ class Main extends PureComponent {
   }
 
   render() {
-    const {offers, handleClick, city, currentCityOffers} = this.props;
+    const {offers, handleClick, city, currentCityOffers, authStatus, authInfo} = this.props;
     const offersCount = offers.length;
+    const isLogged = (authStatus === AuthorizationStatus.AUTH);
     return (
       <div className="page page--gray page--main">
         <header className="header">
@@ -42,10 +44,11 @@ class Main extends PureComponent {
               <nav className="header__nav">
                 <ul className="header__nav-list">
                   <li className="header__nav-item user">
-                    <Link className="header__nav-link header__nav-link--profile" to={AppRoute.SING_IN}>
+                    <Link className="header__nav-link header__nav-link--profile"
+                      to={isLogged ? `/` : AppRoute.SING_IN}>
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
-                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                      <span className="header__user-name user__name">{isLogged ? authInfo.email : `Sign In`}</span>
                     </Link>
                   </li>
                 </ul>
@@ -107,6 +110,10 @@ Main.propTypes = {
       }).isRequired
   ).isRequired,
   handleClick: PropTypes.func,
+  authStatus: PropTypes.string,
+  authInfo: PropTypes.shape({
+    email: PropTypes.string.isRequired,
+  }),
 };
 
 const mapStateToProps = (state) => ({
@@ -114,6 +121,8 @@ const mapStateToProps = (state) => ({
   currentCityOffers: getCurrentCityOffers(state),
   city: getCurrentCity(state),
   onHeadingClick: state.onHeadingClick,
+  authStatus: getAuthorizationStatus(state),
+  authInfo: getAuthorizationInfo(state)
 });
 
 

@@ -11,7 +11,7 @@ import {AuthorizationStatus} from "./const.js";
 import {ActionCreator as UserActionCreator} from './reducers/user/user.js';
 
 const api = createAPI(() => {
-  store.dispatch(UserActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
+  store.dispatch(UserActionCreator.changeAuthorizationStatus(AuthorizationStatus.NO_AUTH));
 });
 
 const store = createStore(

@@ -10,9 +10,14 @@ import Main from "../main/Main.jsx";
 import PropertyScreen from "../property-screen/property-screen.jsx";
 import LoginScreen from "../login-screen/login-screen.jsx";
 
+import withAuthForm from "../../hocs/with-auth-form/with-auth-form.jsx";
+
 import {Operation as OfferOperation} from "../../reducers/offers/offers.js";
+import {Operation as UserOperation} from "../../reducers/user/user.js";
 
 import {getCurrentOffer} from "../../reducers/offers/selectors.js";
+
+const LoginScreenWrapped = withAuthForm(LoginScreen);
 
 class App extends PureComponent {
   constructor(props) {
@@ -30,8 +35,9 @@ class App extends PureComponent {
   }
 
   componentDidMount() {
-    const {onLoadOffers} = this.props;
+    const {onLoadOffers, onCheckAuth} = this.props;
     onLoadOffers();
+    onCheckAuth();
   }
 
   render() {
@@ -40,7 +46,7 @@ class App extends PureComponent {
       <Router history={history}>
         <Switch>
           <Route path={AppRoute.ROOT} component={Main} exact />
-          <Route path={AppRoute.SING_IN} component={LoginScreen} exact />
+          <Route path={AppRoute.SING_IN} component={LoginScreenWrapped} exact />
           <Route path={AppRoute.FAVORITES} exact />
           <Route path={AppRoute.ROOM} exact component={PropertyScreen}/>
 
@@ -53,6 +59,7 @@ class App extends PureComponent {
 App.propTypes = {
   currentOffer: PropTypes.number,
   onLoadOffers: PropTypes.func,
+  onCheckAuth: PropTypes.func,
   authorizationStatus: PropTypes.string,
 };
 
@@ -64,6 +71,9 @@ const mapDispatchToProps = (dispatch) => ({
   onLoadOffers() {
     dispatch(OfferOperation.loadOffers());
   },
+  onCheckAuth() {
+    dispatch(UserOperation.checkAuth());
+  }
 });
 
 export {App};
